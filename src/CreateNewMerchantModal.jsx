@@ -8,6 +8,7 @@ export const CreateNewMerchantModal = ({ setIsOpenMerchant }) => {
     const dispatch = useDispatch()
 
     const addMerchantSubmit = e => {
+        debugger
         e.preventDefault()
         dispatch(addMerchant(merchant))
     }
