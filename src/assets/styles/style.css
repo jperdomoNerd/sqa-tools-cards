@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+html {
+    font-size: 14px;
+}
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #005ffe;
+}
+.input {
+    height: 2.5rem;
+    border: 1px #8c8c8c solid;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    color: #8c8c8c;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+.input-select {
+    width: 100%;
+}
+.input:focus {
+    outline: 1px #005ffe solid;
+    color: #005ffe;
+}
+.label {
+    display: block;
+    color: #005ffe;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+}
+.button {
+    padding: 1rem;
+    border: 2px transparent solid;
+    border-radius: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.button-primary {
+    background: #005ffe;
+}
+.button-primary:hover {
+    color: #005ffe;
+    background: #eefbff;
+    border: 2px #005ffe solid;
+}
+.button-danger {
+    background: #ff0000;
+}
+.button-danger:hover {
+    color: #ff0000;
+    background: #faf3f3;
+    border: 2px #ff0000 solid;
+}
+.mb-small {
+    margin-bottom: 0.5rem;
+}
+.mb-medium {
+    margin-bottom: 0.875rem;
+}
+.mb-big {
+    margin-bottom: 1.125rem;
+}
+.app {
+    display: grid;
+    grid-template-areas: 
+        "open-button"
+        "button-actions"
+        "object-view"
+    ;
+    gap: 1rem;
+}
+.open-button {
+    grid-area: open-button;
+}
+.button-actions {
+    grid-area: button-actions;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem solid red;
+}
+.object-view {
+    grid-area: object-view;
+}
+.table {
+    text-align: center;
+}
+.card-container {
+    display: grid;
+    grid-template-areas: 
+        "card-number card-chip-img"
+        "card-holder-name date"
+    ;
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    width: min-content;
+    padding: 4rem 0.6rem;
+    border: 2px #005ffe solid;
+    border-radius: 1.2rem;
+    background: #eefbff;
+}
+.form-card-container div input {
+    border: none;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.4rem;
+    color: #005ffe;
+    background: none;
+}
+.card-number {
+    grid-area: card-number;
+}
+.card-chip-img {
+    grid-area: card-chip-img;
+}
+.card-chip-img img {
+    width: 3rem;
+}
+.card-holder-name {
+    grid-area: card-holder-name;
+}
+.card-holder-name__input {
+    width: 16rem;
+}
+.date {
+    display: flex;
+}
+.date input {
+    width: 2rem;
+}
+.button-card {
+    grid-area: button-card;
+}
+.forms-container {
+    width: auto;
+    max-height: calc(100vh - 4vh);
+    display: grid;
+    grid-template-areas: 
+        "configuration-form-data"
+        "card-form-data"
+        "transaction-form-data"
+        "location-form-data";
+    gap: 6rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin: 1rem;
+    background: #ffffff;
+    border: 0.2rem #005ffe solid;
+    border-radius: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+.configuration-form-data {
+    grid-area: configuration-form-data;
+}
+.card-form-data {
+    grid-area: card-form-data;
+}
+.location-form-data {
+    grid-area: location-form-data;
+}
+.transaction-form-data {
+    grid-area: transaction-form-data;   
+}
+/* Forms Modal */
+.forms-modal {
+    position: fixed;
+    top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+/* Responsive */
+@media (min-width: 640px) {
+    .app {
+        grid-template-columns: 25% 75%;
+        grid-template-areas: 
+            "open-button object-view"
+            "button-actions object-view"
+        ;
+        gap: 1rem;
+    }
+    .forms-container {
+        grid-template-areas: 
+            "configuration-form-data card-form-data"
+            "transaction-form-data location-form-data"
+        ;
+        gap: 3rem;
+    }
+}
+@media (min-width: 1008px) {
+    .forms-container {
+        grid-template-areas: 
+            "configuration-form-data card-form-data location-form-data"
+            "transaction-form-data transaction-form-data transaction-form-data"
+        ;
+        gap: 3rem;
+    }
+}
+@media (min-width: 1366px) {
+    .forms-container {
+        grid-template-areas: 
+            "configuration-form-data card-form-data location-form-data transaction-form-data";
+        gap: 3rem;
+    }
+}
