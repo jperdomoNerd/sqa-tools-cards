@@ -1,20 +1,32 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addMerchant } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { SuccessToast } from './SuccessToast'
 
 export const CreateNewMerchantModal = ({ setIsOpenMerchant }) => {
     const [ merchant, setMerchant ] = useState('')
+    const [isShowToast, setIsShowToast] = useState(false)
+    const [toastTitle, setToastTitle] = useState('')
+    const [toastMessage, setToastMessage] = useState('')
 
     const dispatch = useDispatch()
 
     const addMerchantSubmit = e => {
-        debugger
         e.preventDefault()
         dispatch(addMerchant(merchant))
+        setIsShowToast(true)
+        setToastTitle('Merchant add successfully!')
+        setToastMessage('A merchant has been successfully added, You can use it now')
     }
 
     return (
         <div className='forms-modal'>
+            <SuccessToast 
+                isShowToast={isShowToast} 
+                setIsShowToast={setIsShowToast}
+                title={toastTitle}
+                message={toastMessage}
+            />
             <div className="forms-container">
                 <form onSubmit={addMerchantSubmit}>
                     <div className='mb-medium'>

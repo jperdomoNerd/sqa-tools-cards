@@ -2,13 +2,13 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addSecretKey } from "./reducers/default-values-form/defaultValuesFormSlice"
 
+
 export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey }) => {
     const [secretKey, setSecreyKey] = useState('')
 
     const dispatch = useDispatch()
 
     const addSecretKeySubmit = e => {
-        debugger
         e.preventDefault()
         dispatch(addSecretKey(secretKey))
     }

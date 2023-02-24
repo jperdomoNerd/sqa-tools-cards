@@ -2,6 +2,7 @@
 import { FormsModal } from './FormsModal'
 import { ButtonActions } from './ButtonActions'
 import { ObjectView } from './ObjectView'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Libs
 import { _createSimpleWebPay, _submitAction } from './lib/simpleWebpay'
