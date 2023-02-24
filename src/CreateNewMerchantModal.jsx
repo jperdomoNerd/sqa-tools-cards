@@ -18,7 +18,7 @@ export const CreateNewMerchantModal = ({ setIsOpenMerchant }) => {
             <div className="forms-container">
                 <form onSubmit={addMerchantSubmit}>
                     <div className='mb-medium'>
-                        <label htmlFor="" className='label mb-small'>Secret Key:</label>
+                        <label htmlFor="" className='label mb-small'>Merchant:</label>
                         <input type="text" name="" id="" className='input' value={merchant} onChange={e => setMerchant(e.target.value)} />
                     </div>
                     <div>

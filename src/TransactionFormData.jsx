@@ -87,7 +87,7 @@ export const TransactionFormData = () => {
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Is Crypto</label>
-                    <select className='input input-select' value={isCrypto} onChange={e => setIsCrypto(e.target.value)}>
+                    <select className='input custom-select mr-sm-2' value={isCrypto} onChange={e => setIsCrypto(e.target.value)}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>

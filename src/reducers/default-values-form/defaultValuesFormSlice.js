@@ -20,7 +20,8 @@ const initialState = {
     referenceNumber: '',
     verifyingPost: '',
     isCrypto: false,
-    merchants: []
+    merchants: [],
+    secretKeys: []
 }
 
 export const defaultValuesFormSlice = createSlice({
@@ -61,6 +62,10 @@ export const defaultValuesFormSlice = createSlice({
         addMerchant: (state, action) => {
             debugger
             state.merchants.push(action.payload)
+        },
+        addSecretKey: (state, action) => {
+            debugger
+            state.secretKeys.push(action.payload)
         }
     }
 })
@@ -71,6 +76,7 @@ export const { setDefaultValuesForm,
     setLocationFormData, 
     setTransactionFormData,
     setVerifyingPost,
-    addMerchant } = defaultValuesFormSlice.actions
+    addMerchant = defaultValuesFormSlice.actions,
+    addSecretKey } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

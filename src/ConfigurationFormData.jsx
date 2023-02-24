@@ -3,15 +3,16 @@ import { useDispatch } from 'react-redux'
 import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
 
 import { CreateNewMerchantModal } from './CreateNewMerchantModal'
+import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
-    
-    const [ merchant, setMerchant ] = useState('')
-    const [ secretKey, setSecretKey ] = useState('')
-    const [ email, setEmail ] = useState('')
-    const [ isOpenMerchant, setIsOpenMerchant ] = useState(false)
-    // const [ isOpenSecretKey, setIsOpenSecretKey ] = useState(false)
+
+    const [merchant, setMerchant] = useState('')
+    const [secretKey, setSecretKey] = useState('')
+    const [email, setEmail] = useState('')
+    const [isOpenMerchant, setIsOpenMerchant] = useState(false)
+    const [isOpenSecreyKey, setIsOpenSecretKey] = useState(false)
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -25,7 +26,7 @@ export const ConfigurationFormData = () => {
         }
         dispatch(setConfigurationFormData(configurationData))
     }, [])
-    
+
     const handleSubmit = e => {
         e.preventDefault()
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -48,20 +49,35 @@ export const ConfigurationFormData = () => {
             {isOpenMerchant &&
                 <CreateNewMerchantModal setIsOpenMerchant={setIsOpenMerchant} />
             }
+            {isOpenSecreyKey &&
+                <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} />
+            }
             <h2 className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
-                <div className='mb-medium'>
+                <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <input type="text" name="" id="" className='input' value={merchant} onChange={e => setMerchant(e.target.value)} />
-                    <button className="button button-primary" 
+                    <select className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
+                        <option value="one">dfdsffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf</option>
+                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
+                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                    </select>
+
+                    <button className="button button-primary"
                         onClick={() => setIsOpenMerchant(true)}>
                         +
                     </button>
                 </div>
-                <div className='mb-medium'>
+                <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <input type="text" name="" id="" className='input' value={secretKey} onChange={e => setSecretKey(e.target.value)} />
-                    <button className="button button-primary">+</button>
+                    <select className='input custom-select' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
+                        <option value="one">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
+                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
+                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                    </select>
+                    <button className="button button-primary"
+                        onClick={() => setIsOpenSecretKey(true)}>
+                        +
+                    </button>
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Email:</label>
