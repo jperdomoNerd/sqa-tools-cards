@@ -20,6 +20,7 @@ import { setVerifyingPost } from './reducers/default-values-form/defaultValuesFo
 
 // Styles
 import './assets/styles/style.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const App = () => {
   const dispatch = useDispatch()

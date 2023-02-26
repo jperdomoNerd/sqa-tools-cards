@@ -2,8 +2,11 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addMerchant } from "./reducers/default-values-form/defaultValuesFormSlice"
 
-export const CreateNewMerchantModal = ({ setIsOpenMerchant }) => {
-    const [ merchant, setMerchant ] = useState('')
+// Bootstrap
+import { Table } from "react-bootstrap"
+
+export const CreateNewMerchantModal = ({ setIsOpenMerchant, MechantId }) => {
+    const [merchant, setMerchant] = useState('')
 
     const dispatch = useDispatch()
 
@@ -30,6 +33,29 @@ export const CreateNewMerchantModal = ({ setIsOpenMerchant }) => {
                         </button>
                     </div>
                 </form>
+
+
+                <div className="forms">
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchan</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>{MechantId}</td>
+
+                                <td>
+                                    <button className="btn btn-danger btn-sm">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         </div>
     )

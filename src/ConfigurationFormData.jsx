@@ -47,19 +47,19 @@ export const ConfigurationFormData = () => {
 
             {/* Modals */}
             {isOpenMerchant &&
-                <CreateNewMerchantModal setIsOpenMerchant={setIsOpenMerchant} />
+                <CreateNewMerchantModal setIsOpenMerchant={setIsOpenMerchant} MechantId={merchant} />
             }
             {isOpenSecreyKey &&
-                <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} />
+                <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
             }
             <h2 className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
-                <div className='taskForm-wrapper'>
+                <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <select className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
-                        <option value="one">dfdsffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf</option>
-                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
-                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                    <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
+                        <option value="dfdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf">dfdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf</option>
+                        <option value="ggggggggggggg">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
+                        <option value="threddddddddddddde">ddsdsdseewqrewrewrewrewrewrewrwr</option>
                     </select>
 
                     <button className="button button-primary"
@@ -67,12 +67,12 @@ export const ConfigurationFormData = () => {
                         +
                     </button>
                 </div>
-                <div className='taskForm-wrapper'>
+                <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select className='input custom-select' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
-                        <option value="one">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
-                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
-                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                    <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
+                        <option value="rrrrrrrrrrrrrr">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
+                        <option value="tttttttttt">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
+                        <option value="wwwwwwwwww">ddsdsdseewqrewrewrewrewrewrewrwr</option>
                     </select>
                     <button className="button button-primary"
                         onClick={() => setIsOpenSecretKey(true)}>

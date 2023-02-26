@@ -2,7 +2,10 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addSecretKey } from "./reducers/default-values-form/defaultValuesFormSlice"
 
-export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey }) => {
+// Bootstrap
+import Table from 'react-bootstrap/Table'
+
+export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey, SecretKeyId }) => {
     const [secretKey, setSecreyKey] = useState('')
 
     const dispatch = useDispatch()
@@ -32,7 +35,25 @@ export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey }) => {
                 </form>
 
                 <div className="forms">
-                    
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Secret Key</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>{SecretKeyId}</td>
+
+                                <td>
+                                    <button className="btn btn-danger btn-sm">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
                 </div>
 
             </div>
