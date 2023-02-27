@@ -35,7 +35,7 @@ export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey, SecretKeyId }) => 
                 </form>
 
                 <div className="forms">
-                    <Table striped bordered hover>
+                    <Table bordered borderColor="primary">
                         <thead>
                             <tr>
                                 <th>#</th>

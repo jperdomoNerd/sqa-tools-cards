@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
 
+// Creat Modal For Mechant and SecretKey
 import { CreateNewMerchantModal } from './CreateNewMerchantModal'
 import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
+
+// Table
+import { TableMechantModal } from './TableMechantModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
@@ -47,7 +51,7 @@ export const ConfigurationFormData = () => {
 
             {/* Modals */}
             {isOpenMerchant &&
-                <CreateNewMerchantModal setIsOpenMerchant={setIsOpenMerchant} MechantId={merchant} />
+                <TableMechantModal setIsOpenMerchant={setIsOpenMerchant} MechantId={merchant} />
             }
             {isOpenSecreyKey &&
                 <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
@@ -57,9 +61,7 @@ export const ConfigurationFormData = () => {
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
                     <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
-                        <option value="dfdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf">dfdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsfsfsfsfsfsfsfsfsfdsfsf</option>
-                        <option value="ggggggggggggg">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
-                        <option value="threddddddddddddde">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                        <option value={merchant}>{merchant}</option>
                     </select>
 
                     <button className="button button-primary"
@@ -70,9 +72,7 @@ export const ConfigurationFormData = () => {
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
                     <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
-                        <option value="rrrrrrrrrrrrrr">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
-                        <option value="tttttttttt">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
-                        <option value="wwwwwwwwww">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                        <option value={secretKey}>{secretKey}</option>
                     </select>
                     <button className="button button-primary"
                         onClick={() => setIsOpenSecretKey(true)}>
