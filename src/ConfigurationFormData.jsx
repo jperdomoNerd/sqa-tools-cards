@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
 
-// Creat Modal For Mechant and SecretKey
-import { CreateNewMerchantModal } from './CreateNewMerchantModal'
-import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
+// // Creat Modal For Mechant and SecretKey
+// import { CreateNewMerchantModal } from './CreateNewMerchantModal'
+// import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
 
 // Table
 import { TableMechantModal } from './TableMechantModal'
+import { TableSecretKey } from './TableSecretKey'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
@@ -54,7 +55,7 @@ export const ConfigurationFormData = () => {
                 <TableMechantModal setIsOpenMerchant={setIsOpenMerchant} MechantId={merchant} />
             }
             {isOpenSecreyKey &&
-                <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
+                <TableSecretKey setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
             }
             <h2 className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>

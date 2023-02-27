@@ -1,36 +1,36 @@
 import { useState } from "react"
 
 //
-import { CreateNewMerchantModal } from "./CreateNewMerchantModal"
+import { CreateNewSecretKeyModal } from "./CreateNewSecretKeyModal"
 
 // Bootstrap
 import { Table } from "react-bootstrap"
 
-export const TableMechantModal = ({ setIsOpenMerchant, MechantId }) => {
+export const TableSecretKey = ({ setIsOpenSecretKey, SecretKeyId }) => {
 
-    const [IsOpenAddMechant, setIsOpenAddMerchant] = useState('')
+    const [isOpenAddSecretKey, setIsOpenAddSecretKey] = useState('')
 
     return (
         <div className='forms-modal'>
 
-            {IsOpenAddMechant &&
-                <CreateNewMerchantModal setIsOpenAddMerchant={setIsOpenAddMerchant} />
+            {isOpenAddSecretKey &&
+                <CreateNewSecretKeyModal setIsOpenAddSecretKey={setIsOpenAddSecretKey} />
             }
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table striped>
+                    <Table bordered borderColor="primary">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Merchant</th>
+                                <th>Secret Key</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>{MechantId}</td>
+                                <td>{SecretKeyId}</td>
 
                                 <td>
                                     <button className="btn btn-danger btn-sm">Eliminar</button>
@@ -40,10 +40,10 @@ export const TableMechantModal = ({ setIsOpenMerchant, MechantId }) => {
                     </Table>
 
                     <div style={{ textAlign: "center" }}>
-                        <button className='button button-primary' onClick={() => setIsOpenAddMerchant(true)}>
+                        <button className='button button-primary' onClick={() => setIsOpenAddSecretKey(true)}>
                             Add
                         </button>
-                        <button className='button button-danger' onClick={() => setIsOpenMerchant(false)}>
+                        <button className='button button-danger' onClick={() => setIsOpenSecretKey(false)}>
                             Close
                         </button>
                     </div>
