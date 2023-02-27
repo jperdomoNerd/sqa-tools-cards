@@ -2,19 +2,15 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setConfigurationFormData, setCurrentMerchant } from './reducers/default-values-form/defaultValuesFormSlice'
 
-// // Creat Modal For Mechant and SecretKey
-// import { CreateNewMerchantModal } from './CreateNewMerchantModal'
-// import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
-
 // Table
-import { TableMechantModal } from './TableMechantModal'
-import { TableSecretKey } from './TableSecretKey'
+import { TableMerchantModal } from './TableMerchantModal'
+import { TableSecretKeyModal } from './TableSecretKeyModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
     const { merchants } = useSelector(state => state.defaultValuesForm)
-
     const [merchant, setMerchant] = useState('')
+    const { secretKeys } = useSelector(state => state.defaultValuesForm)
     const [secretKey, setSecretKey] = useState('')
     const [email, setEmail] = useState('')
     const [isOpenMerchant, setIsOpenMerchant] = useState(false)
@@ -29,7 +25,8 @@ export const ConfigurationFormData = () => {
             merchant: defaultValues.merchant,
             secretKey: defaultValues.secretKey,
             email: defaultValues.email,
-            merchants: defaultValues.merchants
+            merchants: defaultValues.merchants,
+            secretKeys: defaultValues.secretKeys
         }
         dispatch(setConfigurationFormData(configurationData))
     }, [])
@@ -64,7 +61,7 @@ export const ConfigurationFormData = () => {
                 <TableMerchantModal setIsOpenMerchant={setIsOpenMerchant} />
             }
             {isOpenSecreyKey &&
-                <TableSecretKey setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
+                <TableSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} />
             }
             <h2 className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
@@ -81,16 +78,19 @@ export const ConfigurationFormData = () => {
                         Config
                     </button>
                 </div>
+
+                {/* SecretKey */}
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select className='input custom-select' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
-                        <option value="one">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
-                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
-                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
+                    <select className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
+                        {secretKeys.map((secretKey, index) => (
+                            <option key={index} value={secretKey}>{secretKey}</option>
+                        ))}
                     </select>
-                    <button className="button button-primary"
+
+                    <button type="button" className="button button-primary"
                         onClick={() => setIsOpenSecretKey(true)}>
-                        +
+                        Config
                     </button>
                 </div>
                 <div className='mb-medium'>

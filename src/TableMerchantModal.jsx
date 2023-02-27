@@ -1,12 +1,12 @@
 import { useState } from "react"
-
-//
 import { CreateNewMerchantModal } from "./CreateNewMerchantModal"
-
+import { useSelector } from 'react-redux'
 // Bootstrap
 import { Table } from "react-bootstrap"
 
 export const TableMerchantModal = ({ setIsOpenMerchant }) => {
+
+    const { merchants } = useSelector(state => state.defaultValuesForm)
 
     const [IsOpenAddMechant, setIsOpenAddMerchant] = useState('')
 
@@ -30,7 +30,7 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Fire merchant</td>
+                                <td>{merchants}</td>
                                 <td>
                                     <button className="btn btn-danger btn-sm">Eliminar</button>
                                 </td>
@@ -40,11 +40,7 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
 
                     <div style={{ textAlign: "center" }}>
                         <button className='button button-primary' onClick={() => setIsOpenAddMerchant(true)}>
-<<<<<<< HEAD:src/TableMechantModal.jsx
-                            Add
-=======
-                            New
->>>>>>> ad7e584ce92d86cce8e30c04c117560ff8b6aa28:src/TableMerchantModal.jsx
+                        Add
                         </button>
                         <button className='button button-danger' onClick={() => setIsOpenMerchant(false)}>
                             Close

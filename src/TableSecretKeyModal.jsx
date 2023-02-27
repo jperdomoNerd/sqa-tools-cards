@@ -1,12 +1,14 @@
 import { useState } from "react"
-
+import { useSelector } from 'react-redux'
 //
 import { CreateNewSecretKeyModal } from "./CreateNewSecretKeyModal"
 
 // Bootstrap
 import { Table } from "react-bootstrap"
 
-export const TableSecretKey = ({ setIsOpenSecretKey, SecretKeyId }) => {
+export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
+
+    const { secretKeys } = useSelector(state => state.defaultValuesForm)
 
     const [isOpenAddSecretKey, setIsOpenAddSecretKey] = useState('')
 
@@ -30,7 +32,7 @@ export const TableSecretKey = ({ setIsOpenSecretKey, SecretKeyId }) => {
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>{SecretKeyId}</td>
+                                <td>{secretKeys}</td>
 
                                 <td>
                                     <button className="btn btn-danger btn-sm">Eliminar</button>

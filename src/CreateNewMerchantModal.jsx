@@ -10,14 +10,12 @@ export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
     const dispatch = useDispatch()
 
     const addMerchantSubmit = e => {
-        debugger
         e.preventDefault()
         dispatch(addMerchant(merchant))
         dispatch(setToast({
             title: 'Merchant added succefully!',
             message: 'You can use the new merchant in the next request'
         }))
-        debugger
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         defaultValues.merchants.push(merchant)
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
@@ -35,7 +33,7 @@ export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
                         <input type="text" name="" id="" className='input' value={merchant} onChange={e => setMerchant(e.target.value)} />
                     </div>
                     <div>
-                        <button className='button button-primary'>
+                        <button className='button button-primary' onClick={() => setIsOpenAddMerchant(false)}>
                             Save
                         </button>
                         <button className='button button-danger' onClick={() => setIsOpenAddMerchant(false)}>
