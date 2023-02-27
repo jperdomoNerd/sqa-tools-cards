@@ -1,18 +1,32 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { addMerchant } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { useSelector, useDispatch } from "react-redux"
+import { addMerchant, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { SuccessToast } from "./SuccessToast"
 
 export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
+    const { toast } = useSelector(state => state.defaultValuesForm)
     const [merchant, setMerchant] = useState('')
 
     const dispatch = useDispatch()
 
     const addMerchantSubmit = e => {
+        debugger
         e.preventDefault()
         dispatch(addMerchant(merchant))
+        dispatch(setToast({
+            title: 'Merchant added succefully!',
+            message: 'You can use the new merchant in the next request'
+        }))
+        debugger
+        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
+        defaultValues.merchants.push(merchant)
+        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
     }
 
-    return (
+    return <>
+        {toast.isShow &&
+            <SuccessToast />
+        }
         <div className='forms-modal'>
             <div className="forms-container">
                 <form onSubmit={addMerchantSubmit}>
@@ -31,5 +45,5 @@ export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
                 </form>
             </div>
         </div>
-    )
+    </>
 }

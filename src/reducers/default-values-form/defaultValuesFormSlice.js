@@ -21,7 +21,12 @@ const initialState = {
     verifyingPost: '',
     isCrypto: false,
     merchants: [],
-    secretKeys: []
+    secretKeys: [],
+    toast: {
+        title: '',
+        message: '',
+        isShow: false
+    }
 }
 
 export const defaultValuesFormSlice = createSlice({
@@ -33,7 +38,8 @@ export const defaultValuesFormSlice = createSlice({
         setConfigurationFormData: (state, action) => {
             state.merchant = action.payload.merchant
             state.secretKey = action.payload.secretKey
-            state.email = action.payload.email
+            state.email = action.payload.email,
+            state.merchants = action.payload.merchants
         },
         setCardFormData: (state, action) => {
             state.cardNumber = action.payload.cardNumber
@@ -60,12 +66,23 @@ export const defaultValuesFormSlice = createSlice({
             state.verifyingPost = action.payload
         },
         addMerchant: (state, action) => {
-            debugger
             state.merchants.push(action.payload)
         },
         addSecretKey: (state, action) => {
-            debugger
             state.secretKeys.push(action.payload)
+        },
+        setToast: (state, action) => {
+            state.toast = {
+                title: action.payload.title,
+                message: action.payload.message,
+                isShow: true
+            }
+        },
+        hiddenToast: state => {
+            state.toast.isShow = false
+        },
+        setCurrentMerchant(state, action) {
+            state.merchant = action.payload
         }
     }
 })
@@ -76,7 +93,10 @@ export const { setDefaultValuesForm,
     setLocationFormData, 
     setTransactionFormData,
     setVerifyingPost,
-    addMerchant = defaultValuesFormSlice.actions,
-    addSecretKey } = defaultValuesFormSlice.actions
+    addMerchant,
+    addSecretKey,
+    setToast,
+    hiddenToast,
+    setCurrentMerchant } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

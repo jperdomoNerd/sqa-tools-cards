@@ -6,7 +6,7 @@ import { CreateNewMerchantModal } from "./CreateNewMerchantModal"
 // Bootstrap
 import { Table } from "react-bootstrap"
 
-export const TableMechantModal = ({ setIsOpenMerchant, MechantId }) => {
+export const TableMerchantModal = ({ setIsOpenMerchant }) => {
 
     const [IsOpenAddMechant, setIsOpenAddMerchant] = useState('')
 
@@ -30,8 +30,7 @@ export const TableMechantModal = ({ setIsOpenMerchant, MechantId }) => {
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>{MechantId}</td>
-
+                                <td>Fire merchant</td>
                                 <td>
                                     <button className="btn btn-danger btn-sm">Eliminar</button>
                                 </td>
@@ -41,7 +40,11 @@ export const TableMechantModal = ({ setIsOpenMerchant, MechantId }) => {
 
                     <div style={{ textAlign: "center" }}>
                         <button className='button button-primary' onClick={() => setIsOpenAddMerchant(true)}>
+<<<<<<< HEAD:src/TableMechantModal.jsx
                             Add
+=======
+                            New
+>>>>>>> ad7e584ce92d86cce8e30c04c117560ff8b6aa28:src/TableMerchantModal.jsx
                         </button>
                         <button className='button button-danger' onClick={() => setIsOpenMerchant(false)}>
                             Close
