@@ -19,6 +19,8 @@ if (window.localStorage.getItem('defaultValues') === null) {
         referenceNumber: '2310420327',
         verifyingPost: '',
         isCrypto: 'false',
-        merchants: []
+        merchants: [
+            'MzrC/gl6VwS67JrIE+Kyng=='
+        ]
     }))
 }

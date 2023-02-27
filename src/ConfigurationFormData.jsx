@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { setConfigurationFormData, setCurrentMerchant } from './reducers/default-values-form/defaultValuesFormSlice'
 
-// Creat Modal For Mechant and SecretKey
-import { CreateNewMerchantModal } from './CreateNewMerchantModal'
+import { TableMerchantModal } from './TableMerchantModal'
 import { CreateNewSecretKeyModal } from './CreateNewSecretKeyModal'
-
-// Table
-import { TableMechantModal } from './TableMechantModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
+    const { merchants } = useSelector(state => state.defaultValuesForm)
 
     const [merchant, setMerchant] = useState('')
     const [secretKey, setSecretKey] = useState('')
@@ -26,10 +23,18 @@ export const ConfigurationFormData = () => {
         const configurationData = {
             merchant: defaultValues.merchant,
             secretKey: defaultValues.secretKey,
-            email: defaultValues.email
+            email: defaultValues.email,
+            merchants: defaultValues.merchants
         }
         dispatch(setConfigurationFormData(configurationData))
     }, [])
+
+    useEffect(() => {
+        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
+        defaultValues.merchant = merchant
+        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
+        dispatch(setCurrentMerchant(merchant))
+    }, [merchant])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -51,28 +56,32 @@ export const ConfigurationFormData = () => {
 
             {/* Modals */}
             {isOpenMerchant &&
-                <TableMechantModal setIsOpenMerchant={setIsOpenMerchant} MechantId={merchant} />
+                <TableMerchantModal setIsOpenMerchant={setIsOpenMerchant} />
             }
             {isOpenSecreyKey &&
                 <CreateNewSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} SecretKeyId={secretKey} />
             }
             <h2 className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
-                <div className='mb-medium'>
+                <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
-                        <option value={merchant}>{merchant}</option>
+                    <select className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
+                        {merchants.map((merchant, index) => (
+                            <option key={index} value={merchant}>{merchant}</option>
+                        ))}
                     </select>
 
-                    <button className="button button-primary"
+                    <button type="button" className="button button-primary"
                         onClick={() => setIsOpenMerchant(true)}>
-                        +
+                        Config
                     </button>
                 </div>
-                <div className='mb-medium'>
+                <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select style={{ width: '210px', whiteSpace: 'pre' }} className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
-                        <option value={secretKey}>{secretKey}</option>
+                    <select className='input custom-select' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
+                        <option value="one">dfdsfsfsfdsfdsfsfffffffffffffffffffffffsfsfdsfsf</option>
+                        <option value="two">Fadfdsfmdsfodsmfodsmfsdfsfsflse</option>
+                        <option value="three">ddsdsdseewqrewrewrewrewrewrewrwr</option>
                     </select>
                     <button className="button button-primary"
                         onClick={() => setIsOpenSecretKey(true)}>

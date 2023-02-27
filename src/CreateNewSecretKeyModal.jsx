@@ -11,7 +11,6 @@ export const CreateNewSecretKeyModal = ({ setIsOpenSecretKey, SecretKeyId }) => 
     const dispatch = useDispatch()
 
     const addSecretKeySubmit = e => {
-        debugger
         e.preventDefault()
         dispatch(addSecretKey(secretKey))
     }
