@@ -18,7 +18,7 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
         dispatch(deleteMerchant(_merchant))
         dispatch(setToast({
             title: 'Merchant delete succefully!',
-            message: 'You can use the new merchant in the next request'
+            message: 'You can use the merchant in the next request'
         }))
 
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))

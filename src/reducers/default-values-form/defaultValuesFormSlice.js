@@ -75,6 +75,9 @@ export const defaultValuesFormSlice = createSlice({
         deleteMerchant: (state, action) => {
             state.merchants = state.merchants.filter(merchant__ => merchant__ !== action.payload)
         },
+        deleteSecretKey: (state, action) => {
+            state.secretKeys = state.secretKeys.filter(secretKey_ => secretKey_ !== action.payload)
+        },
         setToast: (state, action) => {
             state.toast = {
                 title: action.payload.title,
@@ -103,6 +106,7 @@ export const { setDefaultValuesForm,
     addMerchant,
     addSecretKey,
     deleteMerchant,
+    deleteSecretKey,
     setToast,
     hiddenToast,
     setCurrentSecretKey,

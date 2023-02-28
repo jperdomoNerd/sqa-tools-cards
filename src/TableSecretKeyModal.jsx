@@ -1,5 +1,7 @@
 import { useState } from "react"
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteSecretKey, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { SuccessToast } from "./SuccessToast"
 //
 import { CreateNewSecretKeyModal } from "./CreateNewSecretKeyModal"
 
@@ -8,11 +10,30 @@ import { Table } from "react-bootstrap"
 
 export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
 
+    const { toast } = useSelector(state => state.defaultValuesForm)
     const { secretKeys } = useSelector(state => state.defaultValuesForm)
-
     const [isOpenAddSecretKey, setIsOpenAddSecretKey] = useState('')
+    const dispatch = useDispatch()
 
-    return (
+
+    const deleteSecretKeySubmit = _secretKey => {
+        dispatch(deleteSecretKey(_secretKey))
+        dispatch(setToast({
+            title: 'Secret key delete succefully!',
+            message: 'You can use the secret key in the next request'
+        }))
+
+        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
+
+        defaultValues.secretKeys = defaultValues.secretKeys.filter(secretKey_ => secretKey_ != _secretKey)
+
+        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
+    }
+
+    return <>
+        {toast.isShow &&
+            <SuccessToast />
+        }
         <div className='forms-modal'>
 
             {isOpenAddSecretKey &&
@@ -29,11 +50,12 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {secretKeys.map((secretKey) => (
-                                <tr>
-                                    <td>{secretKey}</td>
+                            {secretKeys.map((_secretKey, key) => (
+                                <tr key={key}>
+                                    <td>{_secretKey}</td>
                                     <td>
-                                        <button className="btn btn-danger btn-sm">Eliminar</button>
+                                        <button onClick={() => deleteSecretKeySubmit(_secretKey)}
+                                            className="btn btn-danger btn-sm">Eliminar</button>
                                     </td>
                                 </tr>
                             ))}
@@ -51,5 +73,5 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
                 </div>
             </div>
         </div>
-    )
+    </>
 }
