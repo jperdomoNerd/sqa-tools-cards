@@ -14,7 +14,7 @@ export const CardFormData = () => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         setCardNumber(defaultValues.cardNumber)
         setCardHolderName(defaultValues.cardHolderName)
-        setExpirationDateMonth(defaultValues.expirationDateMoth)
+        setExpirationDateMonth(defaultValues.expirationDateMonth)
         setExpirationDateYear(defaultValues.expirationDateYear)
         const configurationData = {
             cardNumber: defaultValues.cardNumber,
@@ -26,11 +26,10 @@ export const CardFormData = () => {
     }, [])
     
     const handleSubmit = e => {
-        debugger
         e.preventDefault()
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         defaultValues.cardNumber = cardNumber
-        defaultValues.expirationDateMoth = expirationDateMonth
+        defaultValues.expirationDateMonth = expirationDateMonth
         defaultValues.expirationDateYear = expirationDateYear
         defaultValues.cardHolderName = cardHolderName
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))

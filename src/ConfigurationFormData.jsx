@@ -8,9 +8,8 @@ import { TableSecretKeyModal } from './TableSecretKeyModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
-    const { merchants } = useSelector(state => state.defaultValuesForm)
-    const [merchant, setMerchant] = useState('')
-    const { secretKeys } = useSelector(state => state.defaultValuesForm)
+    const { merchant, merchants, secretKeys } = useSelector(state => state.defaultValuesForm)
+    const [localMerchant, setLocalMerchant] = useState('')
     const [secretKey, setSecretKey] = useState('')
     const [email, setEmail] = useState('')
     const [isOpenMerchant, setIsOpenMerchant] = useState(false)
@@ -18,7 +17,7 @@ export const ConfigurationFormData = () => {
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-        setMerchant(defaultValues.merchant)
+        setLocalMerchant(defaultValues.merchant)
         setSecretKey(defaultValues.secretKey)
         setEmail(defaultValues.email)
         const configurationData = {
@@ -29,22 +28,14 @@ export const ConfigurationFormData = () => {
             secretKeys: defaultValues.secretKeys
         }
         dispatch(setConfigurationFormData(configurationData))
+        dispatch(setCurrentMerchant(configurationData.merchant))
+        dispatch(setCurrentSecretKey(configurationData.secretKey))
     }, [])
-
-    useEffect(() => {
-        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-        defaultValues.merchant = merchant
-        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
-        dispatch(setCurrentMerchant(merchant))
-
-        defaultValues.secretKey = secretKey
-        dispatch(setCurrentSecretKey(secretKey))
-    }, [merchant, secretKey])
 
     const handleSubmit = e => {
         e.preventDefault()
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-        defaultValues.merchant = merchant
+        defaultValues.merchant = localMerchant
         defaultValues.secretKey = secretKey
         defaultValues.email = email
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
@@ -54,6 +45,8 @@ export const ConfigurationFormData = () => {
             email: defaultValues.email
         }
         dispatch(setConfigurationFormData(configurationData))
+        dispatch(setCurrentMerchant(localMerchant))
+        dispatch(setCurrentSecretKey(secretKey))
     }
 
     return (
@@ -70,7 +63,7 @@ export const ConfigurationFormData = () => {
             <form onSubmit={handleSubmit}>
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
+                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4' value={localMerchant} onChange={e => setLocalMerchant(e.target.value)}>
                         {merchants.map((merchant, index) => (
                             <option key={index} value={merchant}>{merchant}</option>
                         ))}
