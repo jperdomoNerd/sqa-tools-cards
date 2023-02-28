@@ -48,8 +48,8 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {merchants.map((_merchant) => (
-                                <tr>
+                            {merchants.map((_merchant, key) => (
+                                <tr key={key}>
                                     <td>{_merchant}</td>
                                     <td>
                                         <button onClick={() => deleteMerchantSubmit(_merchant)}

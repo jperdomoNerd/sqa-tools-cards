@@ -73,9 +73,7 @@ export const defaultValuesFormSlice = createSlice({
             state.secretKeys.push(action.payload)
         },
         deleteMerchant: (state, action) => {
-            state.merchants = state.merchants.filter(merchant__ => {
-                merchant__ != action.payload
-            })
+            state.merchants = state.merchants.filter(merchant__ => merchant__ !== action.payload)
         },
         setToast: (state, action) => {
             state.toast = {
