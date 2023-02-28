@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setConfigurationFormData, setCurrentMerchant } from './reducers/default-values-form/defaultValuesFormSlice'
-
+import { setConfigurationFormData, setCurrentMerchant, setCurrentSecretKey } from './reducers/default-values-form/defaultValuesFormSlice'
+import { AiFillSetting } from "react-icons/ai";
 // Table
 import { TableMerchantModal } from './TableMerchantModal'
 import { TableSecretKeyModal } from './TableSecretKeyModal'
@@ -36,7 +36,10 @@ export const ConfigurationFormData = () => {
         defaultValues.merchant = merchant
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
         dispatch(setCurrentMerchant(merchant))
-    }, [merchant])
+
+        defaultValues.secretKey = secretKey
+        dispatch(setCurrentSecretKey(secretKey))
+    }, [merchant, secretKey])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -63,11 +66,11 @@ export const ConfigurationFormData = () => {
             {isOpenSecreyKey &&
                 <TableSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} />
             }
-            <h2 className='title mb-big'>Configuration Data</h2>
+            <h2 style={{ textAlign: 'center' }} className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <select className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
+                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4' value={merchant} onChange={e => setMerchant(e.target.value)}>
                         {merchants.map((merchant, index) => (
                             <option key={index} value={merchant}>{merchant}</option>
                         ))}
@@ -75,14 +78,14 @@ export const ConfigurationFormData = () => {
 
                     <button type="button" className="button button-primary"
                         onClick={() => setIsOpenMerchant(true)}>
-                        Config
+                        <AiFillSetting />
                     </button>
                 </div>
 
                 {/* SecretKey */}
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
+                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4' value={secretKey} onChange={e => setSecretKey(e.target.value)}>
                         {secretKeys.map((secretKey, index) => (
                             <option key={index} value={secretKey}>{secretKey}</option>
                         ))}
@@ -90,18 +93,17 @@ export const ConfigurationFormData = () => {
 
                     <button type="button" className="button button-primary"
                         onClick={() => setIsOpenSecretKey(true)}>
-                        Config
+                        <AiFillSetting />
                     </button>
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Email:</label>
                     <input type="text" name="" id="" className='input' value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
-                <div>
-                    <button className='button button-primary'>
-                        Save
-                    </button>
-                </div>
+
+                <button className='button button-primary mx-auto d-block'>
+                    Save
+                </button>
             </form>
         </div>
     )

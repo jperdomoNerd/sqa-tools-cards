@@ -21,23 +21,22 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table bordered borderColor="primary">
+                    <Table responsive="md">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Secret Key</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>{secretKeys}</td>
-
-                                <td>
-                                    <button className="btn btn-danger btn-sm">Eliminar</button>
-                                </td>
-                            </tr>
+                            {secretKeys.map((secretKey) => (
+                                <tr>
+                                    <td>{secretKey}</td>
+                                    <td>
+                                        <button className="btn btn-danger btn-sm">Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
 

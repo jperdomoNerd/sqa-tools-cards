@@ -38,8 +38,9 @@ export const defaultValuesFormSlice = createSlice({
         setConfigurationFormData: (state, action) => {
             state.merchant = action.payload.merchant
             state.secretKey = action.payload.secretKey
-            state.email = action.payload.email,
+            state.email = action.payload.email
             state.merchants = action.payload.merchants
+            state.secretKeys = action.payload.secretKeys
         },
         setCardFormData: (state, action) => {
             state.cardNumber = action.payload.cardNumber
@@ -71,6 +72,11 @@ export const defaultValuesFormSlice = createSlice({
         addSecretKey: (state, action) => {
             state.secretKeys.push(action.payload)
         },
+        deleteMerchant: (state, action) => {
+            state.merchants = state.merchants.filter(merchant__ => {
+                merchant__ != action.payload
+            })
+        },
         setToast: (state, action) => {
             state.toast = {
                 title: action.payload.title,
@@ -83,20 +89,25 @@ export const defaultValuesFormSlice = createSlice({
         },
         setCurrentMerchant(state, action) {
             state.merchant = action.payload
+        },
+        setCurrentSecretKey(state, action) {
+            state.secretKey = action.payload
         }
     }
 })
 
-export const { setDefaultValuesForm, 
-    setConfigurationFormData, 
-    setCardFormData, 
-    setLocationFormData, 
+export const { setDefaultValuesForm,
+    setConfigurationFormData,
+    setCardFormData,
+    setLocationFormData,
     setTransactionFormData,
     setVerifyingPost,
     addMerchant,
     addSecretKey,
+    deleteMerchant,
     setToast,
     hiddenToast,
+    setCurrentSecretKey,
     setCurrentMerchant } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

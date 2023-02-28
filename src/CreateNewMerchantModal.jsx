@@ -19,6 +19,8 @@ export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         defaultValues.merchants.push(merchant)
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
+
+        setIsOpenAddMerchant(false)
     }
 
     return <>
@@ -33,7 +35,7 @@ export const CreateNewMerchantModal = ({ setIsOpenAddMerchant }) => {
                         <input type="text" name="" id="" className='input' value={merchant} onChange={e => setMerchant(e.target.value)} />
                     </div>
                     <div>
-                        <button className='button button-primary' onClick={() => setIsOpenAddMerchant(false)}>
+                        <button className='button button-primary'>
                             Save
                         </button>
                         <button className='button button-danger' onClick={() => setIsOpenAddMerchant(false)}>

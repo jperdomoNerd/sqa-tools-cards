@@ -45,7 +45,7 @@ export const CardFormData = () => {
     
     return (
         <div className='card-form-data'>
-            <h2 className='title mb-big'>Card Data</h2>
+            <h2 style={{textAlign: 'center'}} className='title mb-big'>Card Data</h2>
             <form onSubmit={handleSubmit} className='form-card-container'>
 
                 <div className="card-container mb-big">
@@ -66,7 +66,7 @@ export const CardFormData = () => {
                 </div>
 
                 <div className='button-card'>
-                    <button  className='button button-primary'>
+                    <button  className='button button-primary mx-auto d-block'>
                         Save
                     </button>
                 </div>

@@ -5,10 +5,10 @@ import { setLocationFormData } from './reducers/default-values-form/defaultValue
 export const LocationFormData = () => {
     const dispatch = useDispatch()
 
-    const [ city, setCity ] = useState('')
-    const [ state, setState ] = useState('')
-    const [ address, setAddress ] = useState('')
-    const [ zipCode, setZipCode ] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [address, setAddress] = useState('')
+    const [zipCode, setZipCode] = useState('')
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -24,7 +24,7 @@ export const LocationFormData = () => {
         }
         dispatch(setLocationFormData(locationData))
     }, [])
-    
+
     const handleSubmit = e => {
         e.preventDefault()
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -44,37 +44,38 @@ export const LocationFormData = () => {
 
     return (
         <div className='location-form-data'>
-            <h2 className='title mb-big'>Location Data</h2>
+            <h2 style={{ textAlign: 'center' }} className='title mb-big'>Location Data</h2>
             <form onSubmit={handleSubmit}>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>City</label>
-                    <input type="text" name="" id="" 
-                    className='input'
-                    value={city} 
-                    onChange={e => setCity(e.target.value)} />
+                    <input type="text" name="" id=""
+                        className='input'
+                        value={city}
+                        onChange={e => setCity(e.target.value)} />
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>State</label>
-                    <input type="text" name="" id="" 
-                    className='input'
-                    value={state} 
-                    onChange={e => setState(e.target.value)} />
+                    <input type="text" name="" id=""
+                        className='input'
+                        value={state}
+                        onChange={e => setState(e.target.value)} />
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Address</label>
-                    <input type="text" name="" id="" 
-                    className='input'
-                    value={address} 
-                    onChange={e => setAddress(e.target.value)} />
+                    <input type="text" name="" id=""
+                        className='input'
+                        value={address}
+                        onChange={e => setAddress(e.target.value)} />
                 </div>
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>ZipCode</label>
-                    <input type="text" name="" id="" 
-                    className='input'
-                    value={zipCode} 
-                    onChange={e => setZipCode(e.target.value)} />
+                    <input type="text" name="" id=""
+                        className='input'
+                        value={zipCode}
+                        onChange={e => setZipCode(e.target.value)} />
                 </div>
-                <button className='button button-primary'>
+
+                <button className='button button-primary mx-auto d-block'>
                     Save
                 </button>
             </form>

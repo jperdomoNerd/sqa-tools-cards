@@ -65,7 +65,7 @@ export const TransactionFormData = () => {
     return (
 
         <div className='transaction-form-data'>
-            <h2 className='title mb-big'>Transaction Data</h2>
+            <h2 style={{textAlign: 'center'}} className='title mb-big'>Transaction Data</h2>
 
             <form onSubmit={handleSubmit}>
                 <Row>
@@ -126,10 +126,9 @@ export const TransactionFormData = () => {
                     </Col>
                 </Row>
 
-                <button className='button button-primary'>
+                <button className='button button-primary mx-auto d-block'>
                     Save
                 </button>
-
             </form>
         </div>
     )
