@@ -8,12 +8,12 @@ import { TableSecretKeyModal } from './TableSecretKeyModal'
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
-    const { merchant, merchants, secretKeys } = useSelector(state => state.defaultValuesForm)
+    const { merchants, secretKeys } = useSelector(state => state.defaultValuesForm)
     const [localMerchant, setLocalMerchant] = useState('')
     const [secretKey, setSecretKey] = useState('')
     const [email, setEmail] = useState('')
     const [isOpenMerchant, setIsOpenMerchant] = useState(false)
-    const [isOpenSecreyKey, setIsOpenSecretKey] = useState(false)
+    const [isOpenSecretKey, setIsOpenSecretKey] = useState(false)
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -56,14 +56,17 @@ export const ConfigurationFormData = () => {
             {isOpenMerchant &&
                 <TableMerchantModal setIsOpenMerchant={setIsOpenMerchant} />
             }
-            {isOpenSecreyKey &&
+            {isOpenSecretKey &&
                 <TableSecretKeyModal setIsOpenSecretKey={setIsOpenSecretKey} />
             }
             <h2 style={{ textAlign: 'center' }} className='title mb-big'>Configuration Data</h2>
             <form onSubmit={handleSubmit}>
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
-                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4' value={localMerchant} onChange={e => setLocalMerchant(e.target.value)}>
+
+                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                        className='input custom-select mr-sm-4' value={localMerchant}
+                        onChange={e => setLocalMerchant(e.target.value)}>
                         {merchants.map((merchant, index) => (
                             <option key={index} value={merchant}>{merchant}</option>
                         ))}

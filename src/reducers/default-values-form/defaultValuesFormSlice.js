@@ -22,6 +22,7 @@ const initialState = {
     isCrypto: false,
     merchants: [],
     secretKeys: [],
+    tokensId: [],
     toast: {
         title: '',
         message: '',
@@ -56,6 +57,7 @@ export const defaultValuesFormSlice = createSlice({
         },
         setTransactionFormData: (state, action) => {
             state.tokenId = action.payload.tokenId
+            state.tokensId = action.payload.tokensId
             state.cryptoTokenId = action.payload.cryptoTokenId
             state.amount = action.payload.amount
             state.invoiceNumber = action.payload.invoiceNumber
@@ -78,6 +80,9 @@ export const defaultValuesFormSlice = createSlice({
         deleteSecretKey: (state, action) => {
             state.secretKeys = state.secretKeys.filter(secretKey_ => secretKey_ !== action.payload)
         },
+        deleteTokenId: (state, action) => {
+            state.tokensId = state.tokensId.filter(tokenId_ => tokenId_ !== action.payload)
+        },
         setToast: (state, action) => {
             state.toast = {
                 title: action.payload.title,
@@ -93,6 +98,9 @@ export const defaultValuesFormSlice = createSlice({
         },
         setCurrentSecretKey(state, action) {
             state.secretKey = action.payload
+        },
+        setCurrentTokenId(state, action) {
+            state.tokenId = action.payload
         }
     }
 })
@@ -107,9 +115,11 @@ export const { setDefaultValuesForm,
     addSecretKey,
     deleteMerchant,
     deleteSecretKey,
+    deleteTokenId,
     setToast,
     hiddenToast,
     setCurrentSecretKey,
-    setCurrentMerchant } = defaultValuesFormSlice.actions
+    setCurrentMerchant,
+    setCurrentTokenId } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

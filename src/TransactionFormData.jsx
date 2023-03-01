@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setTransactionFormData } from './reducers/default-values-form/defaultValuesFormSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTransactionFormData, setCurrentTokenId } from './reducers/default-values-form/defaultValuesFormSlice'
+import { AiFillSetting } from "react-icons/ai";
+
+// Table
+import { TableTokenId } from './TableTokenId'
 
 // Bootstrap
 import { Row } from 'react-bootstrap'
@@ -11,12 +15,14 @@ export const TransactionFormData = () => {
     const dispatch = useDispatch()
 
     const [tokenId, setTokenId] = useState('')
+    const { tokensId } = useSelector(state => state.defaultValuesForm)
     const [cryptoTokenId, setCryptoTokenId] = useState('')
     const [amount, setAmount] = useState(0.0)
     const [invoiceNumber, setInvoiceNumber] = useState(0)
     const [type, setType] = useState('')
     const [referenceNumber, setReferenceNumber] = useState(0)
     const [isCrypto, setIsCrypto] = useState(false)
+    const [isOpenTableTokenId, setIsOpenTableTokenId] = useState(false)
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
@@ -29,6 +35,7 @@ export const TransactionFormData = () => {
         setIsCrypto(defaultValues.isCrypto)
         const transactionData = {
             tokenId: defaultValues.tokenId,
+            tokensId: defaultValues.tokensId,
             cryptoTokenId: defaultValues.cryptoTokenId,
             amount: defaultValues.amount,
             invoiceNumber: defaultValues.invoiceNumber,
@@ -37,6 +44,7 @@ export const TransactionFormData = () => {
             isCrypto: defaultValues.isCrypto
         }
         dispatch(setTransactionFormData(transactionData))
+        dispatch(setCurrentTokenId(transactionData.tokenId))
     }, [])
 
     const handleSubmit = e => {
@@ -60,19 +68,37 @@ export const TransactionFormData = () => {
             isCrypto: defaultValues.isCrypto
         }
         dispatch(setTransactionFormData(transactionData))
+        dispatch(setCurrentTokenId(tokenId))
     }
 
     return (
-
         <div className='transaction-form-data'>
-            <h2 style={{textAlign: 'center'}} className='title mb-big'>Transaction Data</h2>
+
+            {isOpenTableTokenId &&
+                <TableTokenId setIsOpenTableTokenId={setIsOpenTableTokenId} />
+            }
+            <h2 style={{ textAlign: 'center' }} className='title mb-big'>Transaction Data</h2>
 
             <form onSubmit={handleSubmit}>
                 <Row>
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Token Id</label>
-                            <input type="text" name="" id="" className='input' value={tokenId} onChange={e => setTokenId(e.target.value)} />
+
+                            <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                                className='input custom-select mr-sm-4'
+                                value={tokenId} onChange={e => setTokenId(e.target.value)}>
+                                {tokensId.map((tokenId, index) => (
+                                    <option key={index} value={tokenId}>{tokenId}</option>
+                                ))}
+                            </select>
+
+                            <button type="button" className="button button-primary"
+                                onClick={() => setIsOpenTableTokenId(true)}>
+                                <AiFillSetting />
+                            </button>
+
+                            {/* <input type="text" name="" id="" className='input' value={tokenId} onChange={e => setTokenId(e.target.value)} /> */}
                         </div>
                     </Col>
 

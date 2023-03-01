@@ -24,6 +24,9 @@ if (window.localStorage.getItem('defaultValues') === null) {
         ],
         secretKeys: [
             '7f127fdad955567d93861c206027e6b7796592645692c77375666ef00629b230'
-        ]
+        ],
+        tokensId: [
+            'CA7F8LYG',
+        ],
     }))
 }
