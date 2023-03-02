@@ -12,6 +12,8 @@ export const TableTokenId = ({ setIsOpenTableTokenId }) => {
     const { tokensId } = useSelector(state => state.defaultValuesForm)
     const dispatch = useDispatch()
 
+    const [page] = useState(1)
+
     const deleteTokenIdSubmit = _tokenId => {
         dispatch(deleteTokenId(_tokenId))
         dispatch(setToast({
@@ -34,23 +36,26 @@ export const TableTokenId = ({ setIsOpenTableTokenId }) => {
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table small responsive="md">
+                    <Table striped bordered hover responsive="md">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Token Id</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {tokensId.map((_tokenId, key) => (
+                            {tokensId.length > 0 && tokensId.map((_tokenId, key) => (
                                 <tr key={key}>
+                                    <td>{(page - 1) * 5 + (key + 1)}</td>
                                     <td>{_tokenId}</td>
                                     <td>
                                         <button onClick={() => deleteTokenIdSubmit(_tokenId)}
                                             className="btn btn-danger btn-sm">Eliminar</button>
                                     </td>
                                 </tr>
-                            ))}
+                            ))
+                            }
                         </tbody>
                     </Table>
 
@@ -61,6 +66,6 @@ export const TableTokenId = ({ setIsOpenTableTokenId }) => {
                     </div>
                 </div>
             </div>
-        </div>        
-    </>    
+        </div>
+    </>
 }

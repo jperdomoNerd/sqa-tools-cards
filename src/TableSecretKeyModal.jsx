@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteSecretKey, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { deleteSecretKey, setCurrentSecretKey, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
 import { SuccessToast } from "./SuccessToast"
-//
+
+// Model create SecretKey
 import { CreateNewSecretKeyModal } from "./CreateNewSecretKeyModal"
 
 // Bootstrap
 import { Table } from "react-bootstrap"
+import { Pagination } from "react-bootstrap"
 
 export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
 
@@ -15,6 +17,17 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
     const [isOpenAddSecretKey, setIsOpenAddSecretKey] = useState('')
     const dispatch = useDispatch()
 
+    const [page] = useState(1)
+
+    let active = 1;
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === active}>
+                {number}
+            </Pagination.Item>,
+        );
+    }
 
     const deleteSecretKeySubmit = _secretKey => {
         dispatch(deleteSecretKey(_secretKey))
@@ -42,16 +55,18 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table responsive="md">
+                    <Table striped bordered hover responsive="md">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Secret Key</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {secretKeys.map((_secretKey, key) => (
+                            {secretKeys.length > 0 && secretKeys.map((_secretKey, key) => (
                                 <tr key={key}>
+                                    <td>{(page - 1) * 5 + (key + 1)}</td>
                                     <td>{_secretKey}</td>
                                     <td>
                                         <button onClick={() => deleteSecretKeySubmit(_secretKey)}
@@ -61,6 +76,10 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
                             ))}
                         </tbody>
                     </Table>
+
+                    {/* <div>
+                        <Pagination>{items}</Pagination>
+                    </div> */}
 
                     <div style={{ textAlign: "center" }}>
                         <button className='button button-primary' onClick={() => setIsOpenAddSecretKey(true)}>

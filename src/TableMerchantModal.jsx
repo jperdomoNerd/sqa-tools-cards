@@ -14,6 +14,8 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
     const [IsOpenAddMechant, setIsOpenAddMerchant] = useState('')
     const dispatch = useDispatch()
 
+    const [page] = useState(1)
+
     const deleteMerchantSubmit = _merchant => {
         dispatch(deleteMerchant(_merchant))
         dispatch(setToast({
@@ -40,16 +42,18 @@ export const TableMerchantModal = ({ setIsOpenMerchant }) => {
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table striped>
+                    <Table striped bordered hover responsive="md">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Merchant</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {merchants.map((_merchant, key) => (
+                            {merchants.length > 0 && merchants.map((_merchant, key) => (
                                 <tr key={key}>
+                                    <td>{(page - 1) * 5 + (key + 1)}</td>
                                     <td>{_merchant}</td>
                                     <td>
                                         <button onClick={() => deleteMerchantSubmit(_merchant)}
