@@ -21,9 +21,11 @@ if (window.localStorage.getItem('defaultValues') === null) {
         isCrypto: 'false',
         merchants: [
             'MzrC/gl6VwS67JrIE+Kyng==',
+            '/4S+YXsW7LBo6AjAg4VCQA=='
         ],
         secretKeys: [
-            '7f127fdad955567d93861c206027e6b7796592645692c77375666ef00629b230'
+            '7f127fdad955567d93861c206027e6b7796592645692c77375666ef00629b230',
+            '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce'
         ],
         tokensId: [
             'CA7F8LYG',
