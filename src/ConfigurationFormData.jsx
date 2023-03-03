@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setConfigurationFormData, setCurrentMerchant, setCurrentSecretKey } from './reducers/default-values-form/defaultValuesFormSlice'
 import { AiFillSetting } from "react-icons/ai";
+
 // Table
 import { TableMerchantModal } from './TableMerchantModal'
 import { TableSecretKeyModal } from './TableSecretKeyModal'

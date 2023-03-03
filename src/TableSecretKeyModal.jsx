@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteSecretKey, setCurrentSecretKey, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { deleteSecretKey, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
 import { SuccessToast } from "./SuccessToast"
+import { PaginationTable } from "./PaginationTable"
 
 // Model create SecretKey
 import { CreateNewSecretKeyModal } from "./CreateNewSecretKeyModal"
@@ -17,30 +18,32 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
     const [isOpenAddSecretKey, setIsOpenAddSecretKey] = useState('')
     const dispatch = useDispatch()
 
-    const [page] = useState(1)
-
-    let active = 1;
-    let items = [];
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active}>
-                {number}
-            </Pagination.Item>,
-        );
-    }
-
     const deleteSecretKeySubmit = _secretKey => {
         dispatch(deleteSecretKey(_secretKey))
         dispatch(setToast({
             title: 'Secret key delete succefully!',
             message: 'You can use the secret key in the next request'
         }))
-
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-
         defaultValues.secretKeys = defaultValues.secretKeys.filter(secretKey_ => secretKey_ != _secretKey)
-
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
+    }
+
+    // Pagination
+    const [page, setPage] = useState(1)
+    const [secretKeysLimits, setSecretKeysLimits] = useState(1)
+
+    useEffect(() => {
+        const getData = (_data, _page, _limit) => {
+            const startIn = _limit * (_page - 1)
+            return _data.slice(startIn, startIn + _limit)
+        }
+        setSecretKeysLimits(getData(secretKeys, page, 5))
+    }, [page, secretKeysLimits]);
+
+
+    const handleChangePage = (page) => {
+        setPage(page)
     }
 
     return <>
@@ -64,7 +67,7 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {secretKeys.length > 0 && secretKeys.map((_secretKey, key) => (
+                            {secretKeysLimits.length > 0 && secretKeysLimits.map((_secretKey, key) => (
                                 <tr key={key}>
                                     <td>{(page - 1) * 5 + (key + 1)}</td>
                                     <td>{_secretKey}</td>
@@ -77,9 +80,16 @@ export const TableSecretKeyModal = ({ setIsOpenSecretKey }) => {
                         </tbody>
                     </Table>
 
-                    {/* <div>
-                        <Pagination>{items}</Pagination>
-                    </div> */}
+                    <div className="container d-flex justify-content-center">
+                        {
+                            <PaginationTable
+                                total={Math.ceil(secretKeys.length / 5)}
+                                current={page}
+                                onChangePage={handleChangePage}>
+                            </PaginationTable>
+                        }
+                    </div>
+
 
                     <div style={{ textAlign: "center" }}>
                         <button className='button button-primary' onClick={() => setIsOpenAddSecretKey(true)}>
