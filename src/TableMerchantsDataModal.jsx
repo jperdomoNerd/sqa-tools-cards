@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteMerchantsData,
-  setToast,
-} from "./reducers/default-values-form/defaultValuesFormSlice";
+import { deleteMerchantsData, setToast } from "./reducers/default-values-form/defaultValuesFormSlice";
 import { SuccessToast } from "./SuccessToast";
 
 // Merchant
@@ -16,38 +13,18 @@ import { PaginationTable } from "./PaginationTable";
 // Bootstrap
 import { Table } from "react-bootstrap";
 
+
 export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
+
   const { toast } = useSelector((state) => state.defaultValuesForm);
-
   const { mechantsData } = useSelector((state) => state.defaultValuesForm);
-
-  const [isOpenAddMechant, setIsOpenAddMerchant] = useState("");
   const dispatch = useDispatch();
 
-  const [isOpenUpdateMerchantsData, setIsOpenUpdateMerchantsData] =
-    useState("");
+  // Open modals
+  const [isOpenAddMechant, setIsOpenAddMerchant] = useState(false);
+  const [isOpenUpdateMerchantsData, setIsOpenUpdateMerchantsData] = useState(false);
 
   const deleteMerchantSubmit = (_merchantsData) => {
-    dispatch(deleteMerchantsData(_merchantsData));
-    dispatch(
-      setToast({
-        title: "Merchants Data delete succefully!",
-        message: "You can use the merchants data id in the next request",
-      })
-    );
-
-    const defaultValues = JSON.parse(
-      window.localStorage.getItem("defaultValues")
-    );
-
-    defaultValues.mechantsData = defaultValues.mechantsData.filter(
-      (merchantsData_) => merchantsData_ != _merchantsData
-    );
-
-    window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
-  };
-
-  const updateMerchantsData = (_merchantsData) => {
     dispatch(deleteMerchantsData(_merchantsData));
     dispatch(
       setToast({
@@ -82,6 +59,18 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
       return _data.slice(startIn, startIn + _limit);
     };
     setMerchantCodeLimits(getData(mechantsData, page, 5));
+  };
+
+  // Update
+  const [dataMerchants, setDataMerchants] = useState({})
+
+  const updateMerchantsData = (_merchantsDatas) => {
+
+    setDataMerchants(_merchantsDatas);
+
+    <UpdateMerchantDataModal TableMerchantsDataModal={TableMerchantsDataModal} dataMerchants={dataMerchants} />
+    setIsOpenUpdateMerchantsData(true)
+    debugger
   };
 
   return (
@@ -121,7 +110,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
                       <td>{_merchantsDatas.secretKey}</td>
                       <td>
                         <button
-                          onClick={() => deleteMerchantSubmit(_merchantsDatas)}
+                          onClick={() => deleteMerchantSubmit(_merchantsDatas.merchantCode)}
                           className="btn btn-danger btn-sm"
                         >
                           Eliminar
