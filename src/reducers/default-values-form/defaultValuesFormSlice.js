@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+
+    mechantsData: [],
+
     merchant: '',
-    secretKey: '',
+
     email: '',
     cardNumber: '',
     expirationDateMonth: 0,
@@ -21,7 +24,6 @@ const initialState = {
     verifyingPost: '',
     isCrypto: false,
     merchants: [],
-    secretKeys: [],
     tokensId: [],
     toast: {
         title: '',
@@ -36,25 +38,28 @@ export const defaultValuesFormSlice = createSlice({
     reducers: {
         setDefaultValuesForm: (state, action) => {
         },
+
         setConfigurationFormData: (state, action) => {
             state.merchant = action.payload.merchant
-            state.secretKey = action.payload.secretKey
             state.email = action.payload.email
             state.merchants = action.payload.merchants
-            state.secretKeys = action.payload.secretKeys
+            state.mechantsData = action.payload.mechantsData
         },
+
         setCardFormData: (state, action) => {
             state.cardNumber = action.payload.cardNumber
             state.expirationDateMonth = action.payload.expirationDateMonth
             state.expirationDateYear = action.payload.expirationDateYear
             state.cardHolderName = action.payload.cardHolderName
         },
+
         setLocationFormData: (state, action) => {
             state.city = action.payload.city
             state.state = action.payload.state
             state.address = action.payload.address
             state.zipCode = action.payload.zipCode
         },
+
         setTransactionFormData: (state, action) => {
             state.tokenId = action.payload.tokenId
             state.tokensId = action.payload.tokensId
@@ -65,24 +70,23 @@ export const defaultValuesFormSlice = createSlice({
             state.referenceNumber = action.payload.referenceNumber
             state.isCrypto = action.payload.isCrypto
         },
+
         setVerifyingPost: (state, action) => {
             state.verifyingPost = action.payload
         },
-        addMerchant: (state, action) => {
-            state.merchants.push(action.payload)
+
+        addMerchantObj: (state, action) => {
+            state.mechantsData.push(action.payload)
         },
-        addSecretKey: (state, action) => {
-            state.secretKeys.push(action.payload)
+
+        deleteMerchantsData: (state, action) => {
+            state.mechantsData = state.mechantsData.filter(merchantData__ => merchantData__ !== action.payload)
         },
-        deleteMerchant: (state, action) => {
-            state.merchants = state.merchants.filter(merchant__ => merchant__ !== action.payload)
-        },
-        deleteSecretKey: (state, action) => {
-            state.secretKeys = state.secretKeys.filter(secretKey_ => secretKey_ !== action.payload)
-        },
+
         deleteTokenId: (state, action) => {
             state.tokensId = state.tokensId.filter(tokenId_ => tokenId_ !== action.payload)
         },
+
         setToast: (state, action) => {
             state.toast = {
                 title: action.payload.title,
@@ -90,15 +94,15 @@ export const defaultValuesFormSlice = createSlice({
                 isShow: true
             }
         },
+
         hiddenToast: state => {
+
             state.toast.isShow = false
         },
         setCurrentMerchant(state, action) {
             state.merchant = action.payload
         },
-        setCurrentSecretKey(state, action) {
-            state.secretKey = action.payload
-        },
+
         setCurrentTokenId(state, action) {
             state.tokenId = action.payload
         }
@@ -111,15 +115,12 @@ export const { setDefaultValuesForm,
     setLocationFormData,
     setTransactionFormData,
     setVerifyingPost,
-    addMerchant,
-    addSecretKey,
-    deleteMerchant,
-    deleteSecretKey,
+    deleteMerchantsData,
     deleteTokenId,
     setToast,
     hiddenToast,
-    setCurrentSecretKey,
     setCurrentMerchant,
-    setCurrentTokenId } = defaultValuesFormSlice.actions
+    setCurrentTokenId,
+    addMerchantObj } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

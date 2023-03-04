@@ -98,21 +98,21 @@ export const TransactionFormData = () => {
                                 <AiFillSetting />
                             </button>
 
-                            {/* <input type="text" name="" id="" className='input' value={tokenId} onChange={e => setTokenId(e.target.value)} /> */}
+                            {/* <input type="text" className='input' value={tokenId} onChange={e => setTokenId(e.target.value)} /> */}
                         </div>
                     </Col>
 
                     <Col>
                         <div className="mb-medium">
                             <label htmlFor="" className="label mb-small">Crypto Token Id</label>
-                            <textarea name="" id="" cols="20" rows="10" className='input textarea' value={cryptoTokenId} onChange={e => setCryptoTokenId(e.target.value)} />
+                            <textarea cols="20" rows="10" className='input textarea' value={cryptoTokenId} onChange={e => setCryptoTokenId(e.target.value)} />
                         </div>
                     </Col>
 
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Amount</label>
-                            <input type="text" name="" id="" className='input' value={amount} onChange={e => setAmount(e.target.value)} />
+                            <input type="text" className='input' value={amount} onChange={e => setAmount(e.target.value)} />
                         </div>
                     </Col>
                 </Row>
@@ -121,21 +121,21 @@ export const TransactionFormData = () => {
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Invoice Number</label>
-                            <input type="text" name="" id="" className='input' value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} />
+                            <input type="text" className='input' value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} />
                         </div>
                     </Col>
 
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Type</label>
-                            <input type="text" name="" id="" className='input' value={type} onChange={e => setType(e.target.value)} />
+                            <input type="text" className='input' value={type} onChange={e => setType(e.target.value)} />
                         </div>
                     </Col>
 
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Reference Number</label>
-                            <input type="text" name="" id="" className='input' value={referenceNumber} onChange={e => setReferenceNumber(e.target.value)} />
+                            <input type="text" className='input' value={referenceNumber} onChange={e => setReferenceNumber(e.target.value)} />
                         </div>
                     </Col>
                 </Row>
