@@ -38,7 +38,8 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
     );
 
     defaultValues.mechantsData = defaultValues.mechantsData.filter(
-      (merchantsData_) => merchantsData_ != _merchantsData
+      // (merchantsData_) => merchantsData_ != _merchantsData
+      merchantsData_ => merchantsData_.merchantCode !== _merchantsData.merchantCode
     );
 
     window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
@@ -75,11 +76,6 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
         {isOpenAddMechant && (
           <CreateNewMerchantsDataModal
             setIsOpenAddMerchant={setIsOpenAddMerchant}
-          />
-        )}
-        {isOpenUpdateMerchantsData && (
-          <UpdateMerchantDataModal
-            setIsOpenUpdateMerchantsData={setIsOpenUpdateMerchantsData}
           />
         )}
 
@@ -124,7 +120,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
             </Table>
 
             {isOpenUpdateMerchantsData && (
-              <UpdateMerchantDataModal dataMerchants={dataMerchants} />
+              <UpdateMerchantDataModal setIsOpenUpdateMerchantsData={setIsOpenUpdateMerchantsData} dataMerchants={dataMerchants} />
             )}
 
             {!isOpenAddMechant && !isOpenUpdateMerchantsData && (

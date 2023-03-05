@@ -79,8 +79,11 @@ export const defaultValuesFormSlice = createSlice({
             state.mechantsData.push(action.payload)
         },
 
+        updateMerchansData: (state, action) => {
+            state.mechantsData.push(action.payload)
+        },
+
         deleteMerchantsData: (state, action) => {
-            debugger
             state.mechantsData = state.mechantsData.filter(merchantData__ => merchantData__.merchantCode !== action.payload.merchantCode)
         },
 
@@ -122,6 +125,7 @@ export const { setDefaultValuesForm,
     hiddenToast,
     setCurrentMerchant,
     setCurrentTokenId,
-    addMerchantObj } = defaultValuesFormSlice.actions
+    addMerchantObj,
+    updateMerchansData } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

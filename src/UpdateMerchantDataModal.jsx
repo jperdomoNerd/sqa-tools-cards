@@ -1,37 +1,62 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { updateMerchansData, deleteMerchantsData, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
 import { SuccessToast } from "./SuccessToast"
 
-export const UpdateMerchantDataModal = ({ dataMerchants }) => {
+export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchantsData }) => {
 
     const { toast } = useSelector(state => state.defaultValuesForm)
     const [merchant, setMerchant] = useState('')
     const [merchantCode, setMerchantCode] = useState('')
     const [secretKey, setSecretKey] = useState('')
+    const dispatch = useDispatch();
 
-    const handleOnChange = (key, value) => {
-        setFormData({
-            ...formData,
-            [key]: value
-        })
-    }
+    useEffect(() => {
+        setMerchant(dataMerchants?.merchant)
+        setMerchantCode(dataMerchants?.merchantCode)
+        setSecretKey(dataMerchants?.secretKey)
+    }, []);
+    
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const updateMerchantsDatas = e => {
+        debugger
+
+        dispatch(deleteMerchantsData(dataMerchants));
+        dispatch(
+            setToast({
+                title: "Merchants Data delete succefully!",
+                message: "You can use the merchants data id in the next request",
+            })
+        );
+
+        const defaultValues = JSON.parse(
+            window.localStorage.getItem("defaultValues")
+        );
+
+        defaultValues.mechantsData = defaultValues.mechantsData.filter(
+            merchantsData_ => merchantsData_.merchantCode !== dataMerchants.merchantCode
+        );
+
+        window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
+
         let merchandCodeObj = {
             merchant: merchant,
             merchantCode: merchantCode,
             secretKey: secretKey
         }
-       }
 
-    useEffect(() => {
-        console.log(true)
-        setMerchant(dataMerchants?.merchant)
-        setMerchantCode(dataMerchants?.merchantCode)
-        setSecretKey(dataMerchants?.secretKey)
-        console.log(true)
-    }, []);
+        dispatch(updateMerchansData(merchandCodeObj))
+        dispatch(setToast({
+            title: 'Merchant updated succefully!',
+            message: 'The merchant was successfully updated'
+        }))
+
+        const defaultValues2 = JSON.parse(window.localStorage.getItem('defaultValues'))
+        defaultValues2.mechantsData.push(merchandCodeObj)
+        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues2))
+
+        setIsOpenUpdateMerchantsData(false)
+    }
 
     return <>
 
@@ -41,27 +66,27 @@ export const UpdateMerchantDataModal = ({ dataMerchants }) => {
 
         <div className='forms-modal'>
             <div className="forms-container">
-                <form>
+                <form onSubmit={updateMerchantsDatas}>
                     <div className='mb-medium'>
                         <label htmlFor="" className='label mb-small'>Merchant:</label>
                         <input type="text" className='input' value={merchant}
-                            onChange={(e) => handleOnChange('merchant', e.target.value)} />
+                            onChange={e => setMerchant(e.target.value)} />
                     </div>
                     <div className='mb-medium'>
                         <label htmlFor="" className='label mb-small'>Mechant Code:</label>
                         <input type="text" className='input' value={merchantCode}
-                            onChange={(e) => handleOnChange('merchantCode', e.target.value)} />
+                            onChange={e => setMerchantCode(e.target.value)} />
                     </div>
                     <div className='mb-medium'>
                         <label htmlFor="" className='label mb-small'>Secret Key:</label>
                         <input type="text" className='input' value={secretKey}
-                            onChange={(e) => handleOnChange('secretKey', e.target.value)} />
+                            onChange={e => setSecretKey(e.target.value)} />
                     </div>
                     <div>
                         <button className='button button-primary'>
                             Save
                         </button>
-                        <button className='button button-danger'>
+                        <button className='button button-danger' onClick={() => setIsOpenUpdateMerchantsData(false)}>
                             Close
                         </button>
                     </div>
