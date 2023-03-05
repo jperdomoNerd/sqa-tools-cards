@@ -80,7 +80,8 @@ export const defaultValuesFormSlice = createSlice({
         },
 
         deleteMerchantsData: (state, action) => {
-            state.mechantsData = state.mechantsData.filter(merchantData__ => merchantData__ !== action.payload)
+            debugger
+            state.mechantsData = state.mechantsData.filter(merchantData__ => merchantData__.merchantCode !== action.payload.merchantCode)
         },
 
         deleteTokenId: (state, action) => {

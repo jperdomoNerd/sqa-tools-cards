@@ -13,7 +13,6 @@ import { PaginationTable } from "./PaginationTable";
 // Bootstrap
 import { Table } from "react-bootstrap";
 
-
 export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
 
   const { toast } = useSelector((state) => state.defaultValuesForm);
@@ -24,6 +23,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
   const [isOpenAddMechant, setIsOpenAddMerchant] = useState(false);
   const [isOpenUpdateMerchantsData, setIsOpenUpdateMerchantsData] = useState(false);
 
+  // Delete
   const deleteMerchantSubmit = (_merchantsData) => {
     dispatch(deleteMerchantsData(_merchantsData));
     dispatch(
@@ -48,10 +48,6 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
   const [page, setPage] = useState(1);
   const [merchantCodeLimits, setMerchantCodeLimits] = useState(1);
 
-  useEffect(() => {
-    handleChangePage(page);
-  }, []);
-
   const handleChangePage = (page) => {
     setPage(page);
     const getData = (_data, _page, _limit) => {
@@ -62,16 +58,15 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
   };
 
   // Update
-  const [dataMerchants, setDataMerchants] = useState({})
-
+  const [dataMerchants, setDataMerchants] = useState({ merchant: '', merchantCode: '', secretKey: '' })
   const updateMerchantsData = (_merchantsDatas) => {
-
     setDataMerchants(_merchantsDatas);
-
-    <UpdateMerchantDataModal TableMerchantsDataModal={TableMerchantsDataModal} dataMerchants={dataMerchants} />
     setIsOpenUpdateMerchantsData(true)
-    debugger
   };
+
+  useEffect(() => {
+    handleChangePage(page);
+  }, [mechantsData]);
 
   return (
     <>
@@ -110,7 +105,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
                       <td>{_merchantsDatas.secretKey}</td>
                       <td>
                         <button
-                          onClick={() => deleteMerchantSubmit(_merchantsDatas.merchantCode)}
+                          onClick={() => deleteMerchantSubmit(_merchantsDatas)}
                           className="btn btn-danger btn-sm"
                         >
                           Eliminar
@@ -127,6 +122,10 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
                   ))}
               </tbody>
             </Table>
+
+            {isOpenUpdateMerchantsData && (
+              <UpdateMerchantDataModal dataMerchants={dataMerchants} />
+            )}
 
             {!isOpenAddMechant && !isOpenUpdateMerchantsData && (
               <div className="container d-flex justify-content-center">

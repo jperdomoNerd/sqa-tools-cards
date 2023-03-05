@@ -4,13 +4,11 @@ import { addMerchantObj, setToast } from "./reducers/default-values-form/default
 import { SuccessToast } from "./SuccessToast"
 
 export const CreateNewMerchantsDataModal = ({ setIsOpenAddMerchant }) => {
-    const { toast } = useSelector(state => state.defaultValuesForm)
 
+    const { toast } = useSelector(state => state.defaultValuesForm)
     const [merchant, setMerchant] = useState('')
     const [merchantCode, setmerchantCode] = useState('')
     const [secretKey, setSecretKey] = useState('')
-
-
     const dispatch = useDispatch()
 
     const addCurrentMerchantSubmit = e => {
