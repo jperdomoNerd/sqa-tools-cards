@@ -2,10 +2,15 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 
-    mechantsData: [],
+    mechantsData: [
+        {
+            merchant: "",
+            merchantCode: "",
+            secretKey: ""
+        }
+    ],
 
     merchant: '',
-
     email: '',
     cardNumber: '',
     expirationDateMonth: 0,
@@ -80,7 +85,11 @@ export const defaultValuesFormSlice = createSlice({
         },
 
         updateMerchansData: (state, action) => {
-            state.mechantsData = state.mechantsData.map(merchantData__ => merchantData__.merchantCode !== action.payload.merchantCode)
+            const index = state.mechantsData.findIndex(merchantData__ => merchantData__.merchantCode === action.payload.merchantCode)
+            state.mechantsData[index] = {
+                ...state.mechantsData[index],
+                ...action.payload,
+            };
         },
 
         deleteMerchantsData: (state, action) => {
@@ -100,9 +109,9 @@ export const defaultValuesFormSlice = createSlice({
         },
 
         hiddenToast: state => {
-
             state.toast.isShow = false
         },
+
         setCurrentMerchant(state, action) {
             state.merchant = action.payload
         },

@@ -19,7 +19,6 @@ export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchant
 
 
     const updateMerchantsDatas = e => {
-        debugger
         e.preventDefault()
         let merchandCodeObj = {
             merchant: merchant,
@@ -33,16 +32,16 @@ export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchant
             message: 'The merchant was successfully updated'
         }))
 
+        debugger
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
 
-        // if (setMerchant(dataMerchants?.merchantCode)) {
-            defaultValues.mechantsData = defaultValues.mechantsData.map(
-                merchantsData_ => merchantsData_ !== merchandCodeObj
+        const index = defaultValues.mechantsData.findIndex(
+            merchantsData_ => merchantsData_.merchantCode === merchandCodeObj.merchantCode
         )
-        // }
+
+        defaultValues.mechantsData[index] = merchandCodeObj
 
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
-
         setIsOpenUpdateMerchantsData(false)
     }
 

@@ -11,6 +11,7 @@ export const ConfigurationFormData = () => {
     // const { merchants } = useSelector(state => state.defaultValuesForm)
     const { mechantsData } = useSelector(state => state.defaultValuesForm)
     const [merchantCode, setMerchantCode] = useState('')
+    const [merchante, setMerchant] = useState('')
     const [localMerchant, setLocalMerchant] = useState('')
 
     const [email, setEmail] = useState('')
@@ -21,6 +22,7 @@ export const ConfigurationFormData = () => {
         setLocalMerchant(defaultValues.merchant)
         setEmail(defaultValues.email)
         setMerchantCode(defaultValues.mechantsData[0].merchantCode)
+        setMerchant(defaultValues.mechantsData.merchant)
         const configurationData = {
             merchant: defaultValues.merchant,
             email: defaultValues.email,
@@ -45,6 +47,14 @@ export const ConfigurationFormData = () => {
         dispatch(setCurrentMerchant(localMerchant))
     }
 
+    const cambioDia = (e) => {
+        debugger
+        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
+        if (e.target.value === setMerchant(defaultValues.mechantsData.merchant)) {
+            console.log("holaa")
+        }
+    }
+
     return (
         <div className='configuration-form-data'>
 
@@ -60,9 +70,10 @@ export const ConfigurationFormData = () => {
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
 
                     <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                        className='input custom-select mr-sm-4'>
+                        className='input custom-select mr-sm-4'
+                        onChange={cambioDia}>
                         {mechantsData.map((merchant, index) => (
-                            <option key={index} value={merchant} >
+                            <option key={index} value={merchante} >
                                 {merchant.merchant}
                             </option>
                         ))}
