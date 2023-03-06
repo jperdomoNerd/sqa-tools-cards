@@ -8,7 +8,9 @@ import { TableMerchantsDataModal } from './TableMerchantsDataModal';
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
-    const { merchants } = useSelector(state => state.defaultValuesForm)
+    // const { merchants } = useSelector(state => state.defaultValuesForm)
+    const { mechantsData } = useSelector(state => state.defaultValuesForm)
+    const [merchantCode, setMerchantCode] = useState('')
     const [localMerchant, setLocalMerchant] = useState('')
 
     const [email, setEmail] = useState('')
@@ -18,11 +20,12 @@ export const ConfigurationFormData = () => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         setLocalMerchant(defaultValues.merchant)
         setEmail(defaultValues.email)
+        setMerchantCode(defaultValues.mechantsData[0].merchantCode)
         const configurationData = {
             merchant: defaultValues.merchant,
             email: defaultValues.email,
             merchants: defaultValues.merchants,
-            mechantsData: defaultValues.mechantsData,           
+            mechantsData: defaultValues.mechantsData,
         }
         dispatch(setConfigurationFormData(configurationData))
         dispatch(setCurrentMerchant(configurationData.merchant))
@@ -57,10 +60,11 @@ export const ConfigurationFormData = () => {
                     <label htmlFor="" className='label mb-small'>Merchant:</label>
 
                     <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                        className='input custom-select mr-sm-4' value={localMerchant}
-                        onChange={e => setLocalMerchant(e.target.value)}>
-                        {merchants.map((merchant, index) => (
-                            <option key={index} value={merchant}>{merchant}</option>
+                        className='input custom-select mr-sm-4'>
+                        {mechantsData.map((merchant, index) => (
+                            <option key={index} value={merchant} >
+                                {merchant.merchant}
+                            </option>
                         ))}
                     </select>
 
@@ -70,12 +74,24 @@ export const ConfigurationFormData = () => {
                     </button>
                 </div>
 
+                {/* Merchant Code */}
+                <div className='mb-medium'>
+                    <label htmlFor="" className='label mb-small'>Merchant Code:</label>
+                    <input type="text" className='input' value={merchantCode}
+                        onChange={e => setMerchantCode(e.target.value)} disabled />
+                </div>
+
                 {/* SecretKey */}
                 <div className='taskForm-wrapper'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} className='input custom-select mr-sm-4'>
+                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                        className='input custom-select mr-sm-4'>
+                        {mechantsData.map((secretKey, index) => (
+                            <option key={index} value={secretKey}>{secretKey.secretKey}</option>
+                        ))}
                     </select>
                 </div>
+
                 <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Email:</label>
                     <input type="text" className='input' value={email} onChange={e => setEmail(e.target.value)} />
