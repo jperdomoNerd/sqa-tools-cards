@@ -80,7 +80,7 @@ export const defaultValuesFormSlice = createSlice({
         },
 
         updateMerchansData: (state, action) => {
-            state.mechantsData.push(action.payload)
+            state.mechantsData = state.mechantsData.map(merchantData__ => merchantData__.merchantCode !== action.payload.merchantCode)
         },
 
         deleteMerchantsData: (state, action) => {

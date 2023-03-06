@@ -25,24 +25,25 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
 
   // Delete
   const deleteMerchantSubmit = (_merchantsData) => {
-    dispatch(deleteMerchantsData(_merchantsData));
-    dispatch(
-      setToast({
-        title: "Merchants Data delete succefully!",
-        message: "You can use the merchants data id in the next request",
-      })
-    );
+    const isDelete = window.confirm(`¿Do you want to delete the registration with merchant: ${_merchantsData.merchant}?`)
+    if (isDelete) {
+      dispatch(deleteMerchantsData(_merchantsData));
+      dispatch(
+        setToast({
+          title: "Merchants Data delete succefully!",
+          message: "You can use the merchants data id in the next request",
+        })
+      );
 
-    const defaultValues = JSON.parse(
-      window.localStorage.getItem("defaultValues")
-    );
+      const defaultValues = JSON.parse(window.localStorage.getItem("defaultValues")
+      );
 
-    defaultValues.mechantsData = defaultValues.mechantsData.filter(
-      // (merchantsData_) => merchantsData_ != _merchantsData
-      merchantsData_ => merchantsData_.merchantCode !== _merchantsData.merchantCode
-    );
+      defaultValues.mechantsData = defaultValues.mechantsData.filter(
+        merchantsData_ => merchantsData_.merchantCode !== _merchantsData.merchantCode
+      );
 
-    window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
+      window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
+    }
   };
 
   // Pagination

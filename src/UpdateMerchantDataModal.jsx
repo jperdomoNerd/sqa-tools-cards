@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { updateMerchansData, deleteMerchantsData, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
+import { updateMerchansData, setToast } from "./reducers/default-values-form/defaultValuesFormSlice"
 import { SuccessToast } from "./SuccessToast"
 
 export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchantsData }) => {
@@ -16,29 +16,11 @@ export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchant
         setMerchantCode(dataMerchants?.merchantCode)
         setSecretKey(dataMerchants?.secretKey)
     }, []);
-    
+
 
     const updateMerchantsDatas = e => {
         debugger
-
-        dispatch(deleteMerchantsData(dataMerchants));
-        dispatch(
-            setToast({
-                title: "Merchants Data delete succefully!",
-                message: "You can use the merchants data id in the next request",
-            })
-        );
-
-        const defaultValues = JSON.parse(
-            window.localStorage.getItem("defaultValues")
-        );
-
-        defaultValues.mechantsData = defaultValues.mechantsData.filter(
-            merchantsData_ => merchantsData_.merchantCode !== dataMerchants.merchantCode
-        );
-
-        window.localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
-
+        e.preventDefault()
         let merchandCodeObj = {
             merchant: merchant,
             merchantCode: merchantCode,
@@ -51,9 +33,15 @@ export const UpdateMerchantDataModal = ({ dataMerchants, setIsOpenUpdateMerchant
             message: 'The merchant was successfully updated'
         }))
 
-        const defaultValues2 = JSON.parse(window.localStorage.getItem('defaultValues'))
-        defaultValues2.mechantsData.push(merchandCodeObj)
-        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues2))
+        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
+
+        // if (setMerchant(dataMerchants?.merchantCode)) {
+            defaultValues.mechantsData = defaultValues.mechantsData.map(
+                merchantsData_ => merchantsData_ !== merchandCodeObj
+        )
+        // }
+
+        window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
 
         setIsOpenUpdateMerchantsData(false)
     }
