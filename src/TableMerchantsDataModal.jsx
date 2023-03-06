@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteMerchantsData, setToast } from "./reducers/default-values-form/defaultValuesFormSlice";
 import { SuccessToast } from "./SuccessToast";
+import './table.css'
 
 // Merchant
 import { CreateNewMerchantsDataModal } from "./CreateNewMerchantsDataModal";
@@ -82,7 +83,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
 
         <div className="forms-container">
           <div className="forms">
-            <Table striped bordered hover responsive="md">
+            <Table bordered responsive="md">
               <thead>
                 <tr>
                   <th>#</th>
@@ -97,7 +98,7 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
                   merchantCodeLimits.map((_merchantsDatas, key) => (
                     <tr key={key}>
                       <td>{(page - 1) * 5 + (key + 1)}</td>
-                      <td>{_merchantsDatas.merchant}</td>
+                      <td >{_merchantsDatas.merchant}</td>
                       <td>{_merchantsDatas.merchantCode}</td>
                       <td>{_merchantsDatas.secretKey}</td>
                       <td>

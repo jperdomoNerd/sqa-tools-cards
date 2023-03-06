@@ -1,0 +1,17 @@
+
+
+table td:nth-child(2) {
+    float: left;
+    width: 25em;
+    overflow-wrap: break-word;
+    justify-content: center;
+    text-size-adjust: auto;
+}
+
+table td:nth-child(4) {
+    float: left;
+    width: 20em;
+    overflow-wrap: break-word;
+    justify-content: center;
+    text-size-adjust: auto;
+}
