@@ -3,15 +3,8 @@ export const _createSimpleWebPay = (verifyingPost, _isCrypto) => {
     const _createSimpleWebPayPromise = new Promise((resolve, reject) => {
         $("#NewCenposPlugin").createWebpay({
             url: 'https://webtest.cenpos.net/simplewebpay/cards/',
-            params: `&verifyingPost=${verifyingPost}`,
-            sessionToken: isCrypto,
-            CallbackSuccess(data) {
-                console.log(data)
-            },
-            CallbackCancel(err) {
-                console.log(err)
-                reject(false)
-            }
+            params: `&verifyingPost=${verifyingPost}&callbacksuccess=true&callbacksuccess=true`,
+            sessionToken: isCrypto
         })
         resolve(true)
     })
@@ -19,5 +12,8 @@ export const _createSimpleWebPay = (verifyingPost, _isCrypto) => {
 }
 
 export const _submitAction = () => {
-    $("#NewCenposPlugin").submitAction()
+    return new Promise((resolve, reject) => {
+        $("#NewCenposPlugin").submitAction()
+        resolve(true)
+    })
 }

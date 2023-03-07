@@ -1,5 +1,9 @@
-// Redux
+import { useSelector } from 'react-redux'
+import { SWPButtons } from './SWPButtons'
+
 export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitAction }) => {
+    const { submitNotIsComplete } = useSelector(state => state.controlSWPButtons)
+
     return (
         <div className="object-view">
             {showTokenList && 
@@ -19,11 +23,12 @@ export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitA
                 </table>
             }
             <div id='NewCenposPlugin'></div>
-            {showSubmitButton && 
+            {submitNotIsComplete && showSubmitButton && 
                 <button onClick={submitAction} className='button button-primary'>
                     Submit
                 </button>
             }
+            <SWPButtons />
         </div>
     )
 }
