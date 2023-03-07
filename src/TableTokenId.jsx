@@ -36,7 +36,7 @@ export const TableTokenId = ({ setIsOpenTableTokenId }) => {
 
             <div className="forms-container">
                 <div className="forms">
-                    <Table striped bordered hover responsive="md">
+                    <Table bordered responsive="md">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -60,7 +60,8 @@ export const TableTokenId = ({ setIsOpenTableTokenId }) => {
                     </Table>
 
                     <div style={{ textAlign: "center" }}>
-                        <button className='button button-danger' onClick={() => setIsOpenTableTokenId(false)}>
+                        <button className='button button-danger'
+                            onClick={() => setIsOpenTableTokenId(false)}>
                             Close
                         </button>
                     </div>

@@ -86,9 +86,9 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
             <Table bordered responsive="md">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Merchant</th>
+                  <th>#</th>                  
                   <th>Merchant Code</th>
+                  <th>Merchant</th>
                   <th>Secret Key</th>
                   <th>Acciones</th>
                 </tr>
@@ -97,9 +97,9 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
                 {merchantCodeLimits.length > 0 &&
                   merchantCodeLimits.map((_merchantsDatas, key) => (
                     <tr key={key}>
-                      <td>{(page - 1) * 5 + (key + 1)}</td>
-                      <td >{_merchantsDatas.merchant}</td>
+                      <td>{(page - 1) * 5 + (key + 1)}</td>                      
                       <td>{_merchantsDatas.merchantCode}</td>
+                      <td >{_merchantsDatas.merchant}</td>
                       <td>{_merchantsDatas.secretKey}</td>
                       <td>
                         <button
@@ -111,7 +111,8 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
 
                         <button
                           onClick={() => updateMerchantsData(_merchantsDatas)}
-                          className="btn btn-danger btn-sm"
+                          style={{marginLeft: '5px'}}
+                          className="btn btn-success btn-sm"
                         >
                           Editar
                         </button>

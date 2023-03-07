@@ -3,13 +3,13 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
                             refundTransaction, reversalTransaction }) => {
     return (
         <div className='button-actions'>
-            <button 
+            {/* <button 
                 onClick={getToken}
                 type='button' 
                 className='button button-primary mb-big'
             >
                 Get Token
-            </button>
+            </button> */}
             <button 
                 onClick={useToken}
                 type='button' 
@@ -24,13 +24,13 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
             >
                 Use Crypto Token
             </button>
-            <button 
+            {/* <button 
                 onClick={deleteToken}
                 type='button' 
                 className='button button-primary mb-big'
             >
                 Delete Token
-            </button>
+            </button> */}
             <button 
                 onClick={convertCrypto}
                 type='button' 

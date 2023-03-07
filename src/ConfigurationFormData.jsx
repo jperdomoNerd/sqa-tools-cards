@@ -12,6 +12,7 @@ export const ConfigurationFormData = () => {
     const { mechantsData } = useSelector(state => state.defaultValuesForm)
     const [merchantCode, setMerchantCode] = useState('')
     const [merchante, setMerchant] = useState('')
+    const [secretKeys, setSecretKey] = useState('')
     const [localMerchant, setLocalMerchant] = useState('')
 
     const [email, setEmail] = useState('')
@@ -21,7 +22,6 @@ export const ConfigurationFormData = () => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         setLocalMerchant(defaultValues.merchant)
         setEmail(defaultValues.email)
-        setMerchantCode(defaultValues.mechantsData[0].merchantCode)
         setMerchant(defaultValues.mechantsData.merchant)
         const configurationData = {
             merchant: defaultValues.merchant,
@@ -49,11 +49,19 @@ export const ConfigurationFormData = () => {
 
     const cambioDia = (e) => {
         debugger
-        const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-        if (e.target.value === setMerchant(defaultValues.mechantsData.merchant)) {
-            console.log("holaa")
-        }
+        e.preventDefault()
+
+        const secretKeyChange = mechantsData.filter(merchantData =>
+            merchantData.merchant === e.target.value)
+
+        setSecretKey(secretKeyChange[0].secretKey)
+        setMerchantCode(secretKeyChange[0].merchantCode)
     }
+
+    useEffect(() => {
+        setSecretKey(mechantsData[0].secretKey)
+        setMerchantCode(mechantsData[0].merchantCode)
+    }, [merchante])
 
     return (
         <div className='configuration-form-data'>
@@ -71,7 +79,8 @@ export const ConfigurationFormData = () => {
 
                     <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
                         className='input custom-select mr-sm-4'
-                        onChange={cambioDia}>
+                        onChange={cambioDia}
+                        value={merchante}>
                         {mechantsData.map((merchant, index) => (
                             <option key={index} value={merchante} >
                                 {merchant.merchant}
@@ -93,14 +102,12 @@ export const ConfigurationFormData = () => {
                 </div>
 
                 {/* SecretKey */}
-                <div className='taskForm-wrapper'>
+
+
+                <div className='mb-medium'>
                     <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                    <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                        className='input custom-select mr-sm-4'>
-                        {mechantsData.map((secretKey, index) => (
-                            <option key={index} value={secretKey}>{secretKey.secretKey}</option>
-                        ))}
-                    </select>
+                    <input type="text" className='input' value={secretKeys}
+                        onChange={e => setSecretKey(e.target.value)} disabled />
                 </div>
 
                 <div className='mb-medium'>
