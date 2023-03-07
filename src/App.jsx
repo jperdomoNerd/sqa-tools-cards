@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
+import { cardAddedSuccesfully, submitIsComplete, cardAddedFinally } from './reducers/control-swp-buttons/controlSWPButtonsSlice'
 
 // Styles
 import './assets/styles/style.css'
@@ -73,6 +74,7 @@ export const App = () => {
     await _useToken(formDataSource)
       .then(data => {
         console.log(data)
+        dispatch(cardAddedFinally())
       }).catch(err => console.error(err))
   }
 
@@ -142,7 +144,13 @@ export const App = () => {
   }
   
   const submitAction = () => {
-    _submitAction()
+    _submitAction().then(respose => {
+      dispatch(submitIsComplete())
+      dispatch(cardAddedSuccesfully())
+    }).catch(error => {
+      dispatch(cardAddedFailed())
+      console.log(error)
+    })
   }
 
   const voidTransaction = async () => {
