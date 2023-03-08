@@ -19,6 +19,9 @@ const controlSWPButtonsSlice = createSlice({
         cardAddedFinally: state => {
             state.cardIsAddedSuccessfully = false
         },
+        cardAddedDeleted: state => {
+            state.cardIsAddedSuccessfully = false
+        },
         processIsSuccessully: state => {
             state.isProccessSuccessully = true
         },
@@ -36,7 +39,8 @@ export const {
     cardAddedFailed,
     cardAddedFinally,
     submitIsComplete,
-    processIsSuccessully
+    processIsSuccessully,
+    cardAddedDeleted
 } = controlSWPButtonsSlice.actions
 
 export default controlSWPButtonsSlice.reducer

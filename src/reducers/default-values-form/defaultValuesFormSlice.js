@@ -123,6 +123,7 @@ export const defaultValuesFormSlice = createSlice({
         setCurrentTokenId(state, action) {
             state.tokenId = action.payload
         }
+
     }
 })
 

@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
+import { setCurrentTokenId, setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
 import { cardAddedSuccesfully, submitIsComplete, cardAddedFinally } from './reducers/control-swp-buttons/controlSWPButtonsSlice'
 
 // Styles
@@ -123,13 +123,20 @@ export const App = () => {
     const _verifyingPost = await siteVerify(postSiteVerifyFormData)
     dispatch(setVerifyingPost(_verifyingPost))
     _createSimpleWebPay(_verifyingPost, isCrypto)
-      .then(
-        setTimeout(() => {
-          setShowSubmitButton(true)
-        }, 2000)
-      ).catch(err => {
-        console.error(err)
+      .then(response => {
+        debugger
+        if (response.result) {
+          dispatch(submitIsComplete())
+          dispatch(cardAddedSuccesfully())
+          dispatch(setCurrentTokenId(response.token))
+        }
+      }).catch(error => {
+        dispatch(cardAddedFailed())
+        console.log(error.message)
       })
+      setTimeout(() => {
+        setShowSubmitButton(true)
+      }, 2000)
   }
 
   const buildTokenList = tokens => {
@@ -144,13 +151,7 @@ export const App = () => {
   }
   
   const submitAction = () => {
-    _submitAction().then(respose => {
-      dispatch(submitIsComplete())
-      dispatch(cardAddedSuccesfully())
-    }).catch(error => {
-      dispatch(cardAddedFailed())
-      console.log(error)
-    })
+    _submitAction()
   }
 
   const voidTransaction = async () => {
