@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     cardIsAddedSuccessfully: false,
     isProccessSuccessully: false,
-    submitNotIsComplete: true
+    submitNotIsComplete: true,
+    enableAllButtons: true
 }
 
 const controlSWPButtonsSlice = createSlice({
@@ -30,6 +31,12 @@ const controlSWPButtonsSlice = createSlice({
         },
         submitIsComplete: state => {
             state.submitNotIsComplete = false
+        },
+        disableAllButtons: state => {
+            state.enableButtons = false
+        },
+        enableAllButtons: state => {
+            state.enableAllButtons = true
         }
     }
 })
@@ -38,9 +45,12 @@ export const {
     cardAddedSuccesfully,
     cardAddedFailed,
     cardAddedFinally,
+    processIsFailed,
     submitIsComplete,
     processIsSuccessully,
-    cardAddedDeleted
+    cardAddedDeleted,
+    disableAllButtons,
+    enableAllButtons
 } = controlSWPButtonsSlice.actions
 
 export default controlSWPButtonsSlice.reducer

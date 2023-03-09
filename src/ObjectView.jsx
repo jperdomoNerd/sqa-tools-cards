@@ -3,6 +3,7 @@ import { SWPButtons } from './SWPButtons'
 
 export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitAction }) => {
     const { submitNotIsComplete } = useSelector(state => state.controlSWPButtons)
+    const { responseJson } = useSelector(state => state.defaultValuesForm)
 
     return (
         <div className="object-view">
@@ -29,6 +30,9 @@ export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitA
                 </button>
             }
             <SWPButtons />
+            <div className='response-json'>
+                { responseJson.toString() }
+            </div>
         </div>
     )
 }

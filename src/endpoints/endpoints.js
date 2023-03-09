@@ -90,7 +90,7 @@ export const _deleteToken = async formDataSource => {
     postDeleteTokenFormData.append("verifyingpost", verifyingpost)
     postDeleteTokenFormData.append("tokenid", formDataSource.tokenId)
     
-    await postData(urls.deleteToken, 
+    return await postData(urls.deleteToken, 
         postDeleteTokenFormData)
         .then(data => {
             return data

@@ -10,7 +10,7 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
             >
                 Get Token
             </button> */}
-            <button 
+            {/* <button 
                 onClick={useToken}
                 type='button' 
                 className='button button-primary mb-big'
@@ -23,7 +23,7 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
                 className='button button-primary mb-big'
             >
                 Use Crypto Token
-            </button>
+            </button> */}
             {/* <button 
                 onClick={deleteToken}
                 type='button' 
@@ -31,13 +31,13 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
             >
                 Delete Token
             </button> */}
-            <button 
+            {/* <button 
                 onClick={convertCrypto}
                 type='button' 
                 className='button button-primary mb-big'
             >
                 Convert Crypto
-            </button>
+            </button> */}
             <button 
                 onClick={createSimpleWebPay}
                 type='button' 

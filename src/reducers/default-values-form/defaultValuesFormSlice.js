@@ -38,7 +38,8 @@ const initialState = {
         title: '',
         message: '',
         isShow: false
-    }
+    },
+    responseJson: ''
 }
 
 export const defaultValuesFormSlice = createSlice({
@@ -116,14 +117,21 @@ export const defaultValuesFormSlice = createSlice({
             state.toast.isShow = false
         },
 
-        setCurrentMerchant(state, action) {
+        setCurrentMerchant: (state, action) => {
             state.merchant = action.payload
         },
 
-        setCurrentTokenId(state, action) {
+        setCurrentTokenId: (state, action) => {
             state.tokenId = action.payload
-        }
+        },
 
+        setResponseJson: (state, action) => {
+            state.responseJson = action.payload
+        },
+
+        setIsCrypto: (state, action) => {
+            state.isCrypto = action.payload
+        }
     }
 })
 
@@ -140,6 +148,8 @@ export const { setDefaultValuesForm,
     setCurrentMerchant,
     setCurrentTokenId,
     addMerchantObj,
-    updateMerchansData } = defaultValuesFormSlice.actions
+    updateMerchansData,
+    setResponseJson,
+    setIsCrypto } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

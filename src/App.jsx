@@ -16,8 +16,8 @@ import { useState, useEffect } from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentTokenId, setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
-import { cardAddedSuccesfully, submitIsComplete, cardAddedFinally } from './reducers/control-swp-buttons/controlSWPButtonsSlice'
+import { setCurrentTokenId, setResponseJson, setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
+import { cardAddedSuccesfully, submitIsComplete, cardAddedFinally, cardAddedFailed, processIsFailed } from './reducers/control-swp-buttons/controlSWPButtonsSlice'
 
 // Styles
 import './assets/styles/style.css'
@@ -124,10 +124,11 @@ export const App = () => {
     dispatch(setVerifyingPost(_verifyingPost))
     _createSimpleWebPay(_verifyingPost, isCrypto)
       .then(response => {
-        debugger
         if (response.result) {
           dispatch(submitIsComplete())
           dispatch(cardAddedSuccesfully())
+          dispatch(processIsFailed())
+          dispatch(setResponseJson(''))
           dispatch(setCurrentTokenId(response.token))
         }
       }).catch(error => {
@@ -215,11 +216,7 @@ export const App = () => {
           Open
         </button>
         <ButtonActions 
-          useCrypto={useCrypto}
-          convertCrypto={convertCrypto}
-          useToken={useToken}
           getToken={getToken}
-          deleteToken={deleteToken}
           createSimpleWebPay={createSimpleWebPay}
           voidTransaction={voidTransaction} 
           forceTransaction={forceTransaction}

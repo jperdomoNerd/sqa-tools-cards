@@ -38,5 +38,6 @@ if (window.localStorage.getItem('defaultValues') === null) {
         tokensId: [
             'CA7F8LYG'
         ],
+        responseJson: ''
     }))
 }
