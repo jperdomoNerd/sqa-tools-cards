@@ -64,7 +64,7 @@ export const CardFormData = () => {
                     </div>
                 </div>
 
-                <div className='button-card'>
+                <div className='button-save'>
                     <button  className='button button-primary mx-auto d-block'>
                         Save
                     </button>

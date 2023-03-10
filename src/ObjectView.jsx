@@ -25,7 +25,7 @@ export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitA
             }
             <div id='NewCenposPlugin'></div>
             {submitNotIsComplete && showSubmitButton && 
-                <button onClick={submitAction} className='button button-primary'>
+                <button onClick={submitAction} className='button button-primary button-submit'>
                     Submit
                 </button>
             }

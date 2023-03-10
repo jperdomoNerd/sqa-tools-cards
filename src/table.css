@@ -34,13 +34,11 @@ table td:nth-child(2) {
     vertical-align: middle
 }
 
-
 table td:nth-child(3) {
     width: 14em;
     overflow-wrap: anywhere;
     vertical-align: middle;
 }
-
 
 table td:nth-child(4) {
     width: 20em;

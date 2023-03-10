@@ -20,14 +20,14 @@ export const ConfigurationFormData = () => {
 
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
-        setLocalMerchant(defaultValues.merchant)
-        setEmail(defaultValues.email)
-        setMerchant(defaultValues.mechantsData.merchant)
+        setLocalMerchant(defaultValues?.merchant)
+        setEmail(defaultValues?.email)
+        setMerchant(defaultValues?.mechantsData.merchant)
         const configurationData = {
-            merchant: defaultValues.merchant,
-            email: defaultValues.email,
-            merchants: defaultValues.merchants,
-            mechantsData: defaultValues.mechantsData,
+            merchant: defaultValues?.merchant,
+            email: defaultValues?.email,
+            merchants: defaultValues?.merchants,
+            mechantsData: defaultValues?.mechantsData,
         }
         dispatch(setConfigurationFormData(configurationData))
         dispatch(setCurrentMerchant(configurationData.merchant))
@@ -47,7 +47,7 @@ export const ConfigurationFormData = () => {
         dispatch(setCurrentMerchant(localMerchant))
     }
 
-    const cambioDia = (e) => {
+    const changeMerchant = (e) => {
         debugger
         e.preventDefault()
 
@@ -79,7 +79,7 @@ export const ConfigurationFormData = () => {
 
                     <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
                         className='input custom-select mr-sm-4'
-                        onChange={cambioDia}
+                        onChange={changeMerchant}
                         value={merchante}>
                         {mechantsData.map((merchant, index) => (
                             <option key={index} value={merchante} >

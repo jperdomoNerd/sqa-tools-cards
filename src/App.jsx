@@ -5,11 +5,12 @@ import { ObjectView } from './ObjectView'
 
 // Libs
 import { _createSimpleWebPay, _submitAction } from './lib/simpleWebpay'
-import { 
-  siteVerify, _getToken, _deleteToken, _useToken, 
-  _convertCrypto, _useCrypto, _voidTrasaction, _forceTransaction, 
-  _refundTransaction, _reversalTransaction } 
-from './endpoints/endpoints'
+import {
+  siteVerify, _getToken, _deleteToken, _useToken,
+  _convertCrypto, _useCrypto, _voidTrasaction, _forceTransaction,
+  _refundTransaction, _reversalTransaction
+}
+  from './endpoints/endpoints'
 
 // Hooks
 import { useState, useEffect } from 'react'
@@ -27,10 +28,10 @@ export const App = () => {
   const dispatch = useDispatch()
   const { secretKey, merchant, email, tokenId, amount, invoiceNumber, type, city, state, address, zipCode, cryptoTokenId, referenceNumber, isCrypto } = useSelector(state => state.defaultValuesForm)
 
-  const [ isOpen, setIsOpen ] = useState(true)
-  const [ showSubmitButton, setShowSubmitButton ] = useState(false)
-  const [ showTokenList, setShowTokenList ] = useState(false)
-  const [ tokenList, setTokenList ] = useState([])
+  const [isOpen, setIsOpen] = useState(true)
+  const [showSubmitButton, setShowSubmitButton] = useState(false)
+  const [showTokenList, setShowTokenList] = useState(false)
+  const [tokenList, setTokenList] = useState([])
 
   useEffect(() => {
     setIsOpen(false)
@@ -80,13 +81,13 @@ export const App = () => {
 
   const convertCrypto = async () => {
     const formDataSource = {
-      city: city, 
-      state: state, 
-      address: address, 
-      zipCode: zipCode, 
-      email: email, 
-      merchant: merchant, 
-      secretKey: secretKey, 
+      city: city,
+      state: state,
+      address: address,
+      zipCode: zipCode,
+      email: email,
+      merchant: merchant,
+      secretKey: secretKey,
       cryptoTokenId: cryptoTokenId
     }
     await _convertCrypto(formDataSource)
@@ -135,22 +136,22 @@ export const App = () => {
         dispatch(cardAddedFailed())
         console.log(error.message)
       })
-      setTimeout(() => {
-        setShowSubmitButton(true)
-      }, 2000)
+    setTimeout(() => {
+      setShowSubmitButton(true)
+    }, 2000)
   }
 
   const buildTokenList = tokens => {
     const _tokenList = tokens.map(token => <tr key={token.TokenId}>
-                                                <td>{ token.TokenId }</td>
-                                                <td>{ token.CardNumber }</td>
-                                                <td>{ token.CardType }</td>
-                                                <td>{ token.CardExpirationDate }</td>
-                                                <td>{ token.NameOnCard }</td>
-                                            </tr>)
+      <td>{token.TokenId}</td>
+      <td>{token.CardNumber}</td>
+      <td>{token.CardType}</td>
+      <td>{token.CardExpirationDate}</td>
+      <td>{token.NameOnCard}</td>
+    </tr>)
     setTokenList(_tokenList)
   }
-  
+
   const submitAction = () => {
     _submitAction()
   }
@@ -189,7 +190,7 @@ export const App = () => {
     }
     await _refundTransaction(formDataSource)
       .then(data => {
-        console.log(data)  
+        console.log(data)
       }).catch(err => console.error(err))
   }
 
@@ -207,28 +208,28 @@ export const App = () => {
   }
 
   return (
-      <div className="app">
-        {isOpen &&
-            <FormsModal setIsOpen={setIsOpen} />
-        }
-        <button type='button' className='open-button button button-primary' 
-          onClick={() => setIsOpen(true)}>
-          Open
-        </button>
-        <ButtonActions 
-          getToken={getToken}
-          createSimpleWebPay={createSimpleWebPay}
-          voidTransaction={voidTransaction} 
-          forceTransaction={forceTransaction}
-          refundTransaction={refundTransaction}
-          reversalTransaction={reversalTransaction}
-        />
-        <ObjectView 
-          tokenList={tokenList}
-          showTokenList={showTokenList}
-          showSubmitButton={showSubmitButton}
-          submitAction={submitAction} 
-        />
-      </div>
+    <div className="app">
+      {isOpen &&
+        <FormsModal setIsOpen={setIsOpen} />
+      }
+      <button type='button' className='open-button button button-primary'
+        onClick={() => setIsOpen(true)}>
+        Open
+      </button>
+      <ButtonActions
+        getToken={getToken}
+        createSimpleWebPay={createSimpleWebPay}
+        voidTransaction={voidTransaction}
+        forceTransaction={forceTransaction}
+        refundTransaction={refundTransaction}
+        reversalTransaction={reversalTransaction}
+      />
+      <ObjectView
+        tokenList={tokenList}
+        showTokenList={showTokenList}
+        showSubmitButton={showSubmitButton}
+        submitAction={submitAction}
+      />
+    </div>
   )
 }
