@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
     secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce',
+    merchantCode: '20000023',
     mechantsData: [
         {
             merchant: 'MzrC/gl6VwS67JrIE+Kyng==',
@@ -53,7 +54,7 @@ export const defaultValuesFormSlice = createSlice({
             state.merchant = action.payload.merchant
             state.email = action.payload.email
             state.merchants = action.payload.merchants
-            state.mechantsData = action.payload.mechantsData
+            state.secretKey = action.payload.secretKey
         },
 
         setCardFormData: (state, action) => {

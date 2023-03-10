@@ -45,7 +45,7 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
             >
                 Create SimpleWebPay
             </button>
-            <button
+            {/* <button
                 onClick={voidTransaction}
                 type="button"
                 className="button button-primary mb-big"
@@ -72,7 +72,7 @@ export const ButtonActions = ({ getToken, deleteToken, useToken, convertCrypto,
                 className="button button-primary mb-big"
             >
                 Reversal Transaction
-            </button>
+            </button> */}
         </div>
     )
 }

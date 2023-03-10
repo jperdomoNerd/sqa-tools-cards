@@ -2,6 +2,7 @@ if (window.localStorage.getItem('defaultValues') === null) {
     window.localStorage.setItem('defaultValues', JSON.stringify({
         merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
         secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce',
+        merchantCode: '20000023',
         mechantsData: [
             {
                 merchant: 'MzrC/gl6VwS67JrIE+Kyng==',

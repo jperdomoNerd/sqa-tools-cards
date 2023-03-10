@@ -1,10 +1,12 @@
 import { _forceTransaction, _voidTrasaction, _refundTransaction, _reversalTransaction } from './endpoints/endpoints'
-import { useSelector } from 'react-redux'
+import { setResponseJson } from './reducers/default-values-form/defaultValuesFormSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 export const TransactionManagementButtons = () => {
-
+    // Redux
     const { secretKey, merchant, amount, referenceNumber } = useSelector(state => state.defaultValuesForm)
+    const dispatch = useDispatch()
 
     const voidTransaction = async () => {
         const formDataSource = {
@@ -15,6 +17,7 @@ export const TransactionManagementButtons = () => {
         await _voidTrasaction(formDataSource)
             .then(data => {
                 console.log(data)
+                dispatch(setResponseJson(JSON.stringify(data)))
             }).catch(err => console.error(err))
     }
 
@@ -28,6 +31,7 @@ export const TransactionManagementButtons = () => {
         await _forceTransaction(formDataSource)
             .then(data => {
                 console.log(data)
+                dispatch(setResponseJson(JSON.stringify(data)))
             }).catch(err => console.error(err))
     }
 
@@ -41,6 +45,7 @@ export const TransactionManagementButtons = () => {
         await _refundTransaction(formDataSource)
             .then(data => {
                 console.log(data)
+                dispatch(setResponseJson(JSON.stringify(data)))
             }).catch(err => console.error(err))
     }
 
@@ -54,6 +59,7 @@ export const TransactionManagementButtons = () => {
         await _reversalTransaction(formDataSource)
             .then(data => {
                 console.log(data)
+                dispatch(setResponseJson(JSON.stringify(data)))
             }).catch(err => console.error(err))
     }
 

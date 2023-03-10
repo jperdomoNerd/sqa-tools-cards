@@ -22,12 +22,14 @@ export const ConfigurationFormData = () => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         setLocalMerchant(defaultValues?.merchant)
         setEmail(defaultValues?.email)
-        setMerchant(defaultValues?.mechantsData.merchant)
+        setMerchant(defaultValues?.merchant)
+        setSecretKey(defaultValues?.secretKey)
         const configurationData = {
             merchant: defaultValues?.merchant,
             email: defaultValues?.email,
             merchants: defaultValues?.merchants,
             mechantsData: defaultValues?.mechantsData,
+            secretKey: defaultValues?.secretKey
         }
         dispatch(setConfigurationFormData(configurationData))
         dispatch(setCurrentMerchant(configurationData.merchant))
@@ -38,22 +40,28 @@ export const ConfigurationFormData = () => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         defaultValues.merchant = localMerchant
         defaultValues.email = email
+        defaultValues.secretKey = secretKeys
+        defaultValues.mechantsData = mechantsData
         window.localStorage.setItem('defaultValues', JSON.stringify(defaultValues))
         const configurationData = {
-            merchant: defaultValues.merchant,
-            email: defaultValues.email
+            merchant: localMerchant,
+            email: email,
+            merchants: [],
+            secretKey: secretKeys,
+            mechantsData: localMerchant
         }
         dispatch(setConfigurationFormData(configurationData))
         dispatch(setCurrentMerchant(localMerchant))
+        setMerchant(defaultValues?.merchant)
     }
 
     const changeMerchant = (e) => {
-        debugger
         e.preventDefault()
 
         const secretKeyChange = mechantsData.filter(merchantData =>
             merchantData.merchant === e.target.value)
 
+        console.log(secretKeyChange[0])
         setSecretKey(secretKeyChange[0].secretKey)
         setMerchantCode(secretKeyChange[0].merchantCode)
     }
