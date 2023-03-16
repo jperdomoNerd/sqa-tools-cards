@@ -26,6 +26,7 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
         setEmail(defaultValues?.email)
         setMerchant(defaultValues?.mechantsData.merchant)
         setSecretKey(defaultValues?.mechantsData.secretKey)
+        setMerchantCode(defaultValues?.mechantsData.merchantCode)
         const configurationData = {
             email: defaultValues?.email,
             mechantsData: defaultValues?.mechantsData,
@@ -34,20 +35,20 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
         dispatch(setConfigurationFormData(configurationData))
     }, [])
 
-    const changeMerchant = (e) => {
+    const changeMerchantCode = (e) => {
         debugger
         e.preventDefault()
 
         const secretKeyChange = mechantsData.filter(merchantData =>
-            merchantData.merchant === e.target.value)
+            merchantData.merchantCode === e.target.value)
 
         setSecretKey(secretKeyChange[0].secretKey)
-        setMerchantCode(secretKeyChange[0].merchantCode)
+        setMerchant(secretKeyChange[0].merchant)
     }
 
     useEffect(() => {
         setSecretKey(mechantsData[0].secretKey)
-        setMerchantCode(mechantsData[0].merchantCode)
+        setMerchant(mechantsData[0].merchant)
     }, [merchante])
 
     return (
@@ -66,18 +67,39 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
             </button>
 
             <Row>
-                <Col>
+                {/* <Col> */}
                     {/* Merchant */}
-                    <div className='taskForm-wrapper'>
-                        <label htmlFor="" className='label mb-small'>Merchant:</label>
+                    {/* <div className='taskForm-wrapper'> */}
+                        {/* <label htmlFor="" className='label mb-small'>Merchant:</label> */}
 
-                        <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                        {/* <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
                             className='input custom-select mr-sm-4'
                             onChange={changeMerchant}
                             value={merchante}>
                             {mechantsData.map((merchant, index) => (
                                 <option key={index} value={merchante} >
                                     {merchant.merchant}
+                                </option>
+                            ))}
+                        </select> */}
+                    {/* </div> */}
+
+                {/* </Col> */}
+
+                <Col>
+
+                    {/* Merchant Code */}
+                    <div className='mb-medium'>
+                        <label htmlFor="" className='label mb-small'>Merchant Code:</label>
+                        {/* <input type="text" className='input' value={merchantCode}
+                            onChange={e => setMerchantCode(e.target.value)} disabled /> */}
+                        <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                            className='input custom-select mr-sm-4'
+                            onChange={changeMerchantCode}
+                            value={merchantCode}>
+                            {mechantsData.map((merchantCode, index) => (
+                                <option key={index} value={merchantCode} >
+                                    {merchantCode.merchantCode}
                                 </option>
                             ))}
                         </select>
@@ -90,37 +112,27 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
 
                 </Col>
 
-                <Col>
-
-                    {/* Merchant Code */}
-                    <div className='mb-medium'>
-                        <label htmlFor="" className='label mb-small'>Merchant Code:</label>
-                        <input type="text" className='input' value={merchantCode}
-                            onChange={e => setMerchantCode(e.target.value)} disabled />
-                    </div>
-
-                </Col>
-
             </Row>
 
             <Row>
 
-                <Col>
+                {/* <Col> */}
 
-                    {/* SecretKey */}
-                    <div className='mb-medium'>
+                {/* SecretKey */}
+                {/* <div className='mb-medium'>
                         <label htmlFor="" className='label mb-small'>Secret Key:</label>
                         <input type="text" className='input' value={secretKeys}
                             onChange={e => setSecretKey(e.target.value)} disabled />
-                    </div>
+                    </div> */}
 
-                </Col>
-                <Col>
+                {/* </Col> */}
+
+                {/* <Col>
                     <div className='mb-medium'>
                         <label htmlFor="" className='label mb-small'>Email:</label>
                         <input type="text" className='input' value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
-                </Col>
+                </Col> */}
 
             </Row>
 
