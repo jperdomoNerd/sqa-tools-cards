@@ -218,11 +218,11 @@ html {
 }
 
 .card-form-data {
-    grid-area: card-form-data;
+    grid-area: unset;
 }
 
 .location-form-data {
-    grid-area: location-form-data;
+    grid-area: unset;
 }
 
 .transaction-form-data {

@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLocationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
 
+// Bootstrap
+import { Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
+
 export const LocationFormData = () => {
     const dispatch = useDispatch()
 
@@ -46,38 +50,55 @@ export const LocationFormData = () => {
         <div className='location-form-data'>
             <h2 style={{ textAlign: 'center' }} className='title mb-big'>Location Data</h2>
             <form onSubmit={handleSubmit}>
-                <div className='mb-medium'>
-                    <label htmlFor="" className='label mb-small'>City</label>
-                    <input type="text" name="" id=""
-                        className='input'
-                        value={city}
-                        onChange={e => setCity(e.target.value)} />
-                </div>
-                <div className='mb-medium'>
-                    <label htmlFor="" className='label mb-small'>State</label>
-                    <input type="text" name="" id=""
-                        className='input'
-                        value={state}
-                        onChange={e => setState(e.target.value)} />
-                </div>
-                <div className='mb-medium'>
-                    <label htmlFor="" className='label mb-small'>Address</label>
-                    <input type="text" name="" id=""
-                        className='input'
-                        value={address}
-                        onChange={e => setAddress(e.target.value)} />
-                </div>
-                <div className='mb-medium'>
-                    <label htmlFor="" className='label mb-small'>ZipCode</label>
-                    <input type="text" name="" id=""
-                        className='input'
-                        value={zipCode}
-                        onChange={e => setZipCode(e.target.value)} />
-                </div>
+                <Row>
+                    <Col>
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>City</label>
+                            <input type="text" name="" id=""
+                                className='input'
+                                value={city}
+                                onChange={e => setCity(e.target.value)} />
+                        </div>
+                    </Col>
 
+                    <Col>
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>State</label>
+                            <input type="text" name="" id=""
+                                className='input'
+                                value={state}
+                                onChange={e => setState(e.target.value)} />
+                        </div>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>Address</label>
+                            <input type="text" name="" id=""
+                                className='input'
+                                value={address}
+                                onChange={e => setAddress(e.target.value)} />
+                        </div>
+                    </Col>
+
+
+                    <Col>
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>ZipCode</label>
+                            <input type="text" name="" id=""
+                                className='input'
+                                value={zipCode}
+                                onChange={e => setZipCode(e.target.value)} />
+                        </div>
+                    </Col>
+
+                </Row>
                 <button className='button button-primary mx-auto d-block'>
                     Save
                 </button>
+
             </form>
         </div>
     )

@@ -52,12 +52,13 @@ export const TableMerchantsDataModal = ({ setIsOpenMerchant }) => {
   const [merchantCodeLimits, setMerchantCodeLimits] = useState(1);
 
   const handleChangePage = (page) => {
+    const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
     setPage(page);
     const getData = (_data, _page, _limit) => {
       const startIn = _limit * (_page - 1);
       return _data.slice(startIn, startIn + _limit);
     };
-    setMerchantCodeLimits(getData(mechantsData, page, 5));
+    setMerchantCodeLimits(getData(defaultValues.mechantsData, page, 5));
   };
 
   // Update

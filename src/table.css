@@ -51,3 +51,8 @@ table td:nth-child(5) {
     overflow-wrap: anywhere;
     vertical-align: middle
 }
+
+.btnClose{
+    position: absolute;
+    align-self: end;
+}

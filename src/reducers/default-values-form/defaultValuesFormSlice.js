@@ -33,7 +33,6 @@ const initialState = {
     referenceNumber: '',
     verifyingPost: '',
     isCrypto: false,
-    merchants: [],
     tokensId: [],
     toast: {
         title: '',
@@ -53,7 +52,7 @@ export const defaultValuesFormSlice = createSlice({
         setConfigurationFormData: (state, action) => {
             state.merchant = action.payload.merchant
             state.email = action.payload.email
-            state.merchants = action.payload.merchants
+            state.mechantsData = action.payload.mechantsData
             state.secretKey = action.payload.secretKey
         },
 
@@ -118,10 +117,6 @@ export const defaultValuesFormSlice = createSlice({
             state.toast.isShow = false
         },
 
-        setCurrentMerchant: (state, action) => {
-            state.merchant = action.payload
-        },
-
         setCurrentTokenId: (state, action) => {
             state.tokenId = action.payload
         },
@@ -146,7 +141,6 @@ export const { setDefaultValuesForm,
     deleteTokenId,
     setToast,
     hiddenToast,
-    setCurrentMerchant,
     setCurrentTokenId,
     addMerchantObj,
     updateMerchansData,

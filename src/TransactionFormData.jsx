@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTransactionFormData, setCurrentTokenId } from './reducers/default-values-form/defaultValuesFormSlice'
-import { AiFillSetting } from "react-icons/ai";
-
+import { AiFillSetting } from "react-icons/ai"
 // Table
 import { TableTokenId } from './TableTokenId'
-
 // Bootstrap
 import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
-
 
 export const TransactionFormData = () => {
     const dispatch = useDispatch()
@@ -155,6 +152,7 @@ export const TransactionFormData = () => {
                 <button className='button button-primary mx-auto d-block'>
                     Save
                 </button>
+
             </form>
         </div>
     )

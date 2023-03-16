@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setConfigurationFormData, setCurrentMerchant } from './reducers/default-values-form/defaultValuesFormSlice'
+import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
 import { AiFillSetting } from "react-icons/ai";
 
 // Table
@@ -8,7 +8,6 @@ import { TableMerchantsDataModal } from './TableMerchantsDataModal';
 
 export const ConfigurationFormData = () => {
     const dispatch = useDispatch()
-    // const { merchants } = useSelector(state => state.defaultValuesForm)
     const { mechantsData } = useSelector(state => state.defaultValuesForm)
     const [merchantCode, setMerchantCode] = useState('')
     const [merchante, setMerchant] = useState('')
@@ -27,12 +26,10 @@ export const ConfigurationFormData = () => {
         const configurationData = {
             merchant: defaultValues?.merchant,
             email: defaultValues?.email,
-            merchants: defaultValues?.merchants,
             mechantsData: defaultValues?.mechantsData,
             secretKey: defaultValues?.secretKey
         }
         dispatch(setConfigurationFormData(configurationData))
-        dispatch(setCurrentMerchant(configurationData.merchant))
     }, [])
 
     const handleSubmit = e => {
@@ -46,12 +43,10 @@ export const ConfigurationFormData = () => {
         const configurationData = {
             merchant: localMerchant,
             email: email,
-            merchants: [],
             secretKey: secretKeys,
             mechantsData: localMerchant
         }
         dispatch(setConfigurationFormData(configurationData))
-        dispatch(setCurrentMerchant(localMerchant))
         setMerchant(defaultValues?.merchant)
     }
 

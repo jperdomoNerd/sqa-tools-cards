@@ -224,12 +224,12 @@ export const App = () => {
         refundTransaction={refundTransaction}
         reversalTransaction={reversalTransaction}
       />
-      <ObjectView
+      {/* <ObjectView
         tokenList={tokenList}
         showTokenList={showTokenList}
         showSubmitButton={showSubmitButton}
         submitAction={submitAction}
-      />
+      /> */}
     </div>
   )
 }
