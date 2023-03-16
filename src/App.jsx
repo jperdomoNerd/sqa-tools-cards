@@ -117,6 +117,7 @@ export const App = () => {
   }
 
   const createSimpleWebPay = async () => {
+    debugger
     const postSiteVerifyFormData = new FormData()
     postSiteVerifyFormData.append('secretKey', secretKey)
     postSiteVerifyFormData.append('merchant', merchant)

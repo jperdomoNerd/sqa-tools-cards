@@ -24,32 +24,35 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
     useEffect(() => {
         const defaultValues = JSON.parse(window.localStorage.getItem('defaultValues'))
         setEmail(defaultValues?.email)
-        setMerchant(defaultValues?.mechantsData.merchant)
-        setSecretKey(defaultValues?.mechantsData.secretKey)
-        setMerchantCode(defaultValues?.mechantsData.merchantCode)
+        setMerchant(defaultValues?.merchant)
+        setSecretKey(defaultValues?.secretKey)
+        setMerchantCode(defaultValues?.merchantCode)
         const configurationData = {
             email: defaultValues?.email,
             mechantsData: defaultValues?.mechantsData,
-            secretKey: defaultValues?.secretKey
+            secretKey: defaultValues?.secretKey,
+            merchant: defaultValues?.merchant,
+            merchantCode: defaultValues?.merchantCode
         }
         dispatch(setConfigurationFormData(configurationData))
-    }, [])
+    }, [merchantCode])
 
     const changeMerchantCode = (e) => {
-        debugger
-        e.preventDefault()
-
-        const secretKeyChange = mechantsData.filter(merchantData =>
+        setMerchantCode(e.target.value)
+        
+        const _merchantsData = mechantsData.filter(merchantData =>
             merchantData.merchantCode === e.target.value)
 
-        setSecretKey(secretKeyChange[0].secretKey)
-        setMerchant(secretKeyChange[0].merchant)
+        setSecretKey(_merchantsData.secretKey)
+        setMerchant(_merchantsData.merchant)
+        setMerchantCode(_merchantsData.merchantCode)
     }
 
     useEffect(() => {
-        setSecretKey(mechantsData[0].secretKey)
-        setMerchant(mechantsData[0].merchant)
-    }, [merchante])
+        setSecretKey(mechantsData.secretKey)
+        setMerchant(mechantsData.merchant)
+        setMerchantCode(mechantsData.merchantCode)
+    }, [merchantCode])
 
     return (
         <div className='button-actions'>
@@ -87,29 +90,29 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
                 {/* </Col> */}
 
                 <Col>
+                    <form>
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>Merchant Code:</label>
+                            {/* <input type="text" className='input' value={merchantCode}
+                                onChange={e => setMerchantCode(e.target.value)} disabled /> */}
+                            <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                                className='input custom-select mr-sm-4'
+                                onChange={changeMerchantCode}
+                                value={merchantCode}>
+                                {mechantsData.map((_merchantCode, index) => (
+                                    <option key={index} value={_merchantCode.merchantCode} >
+                                        {_merchantCode.merchantCode}
+                                    </option>
+                                ))}
+                            </select>
 
+                            <button type="button" className="button button-primary"
+                                onClick={() => setIsOpenMerchant(true)}>
+                                <AiFillSetting />
+                            </button>
+                        </div>
+                    </form>
                     {/* Merchant Code */}
-                    <div className='mb-medium'>
-                        <label htmlFor="" className='label mb-small'>Merchant Code:</label>
-                        {/* <input type="text" className='input' value={merchantCode}
-                            onChange={e => setMerchantCode(e.target.value)} disabled /> */}
-                        <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                            className='input custom-select mr-sm-4'
-                            onChange={changeMerchantCode}
-                            value={merchantCode}>
-                            {mechantsData.map((merchantCode, index) => (
-                                <option key={index} value={merchantCode} >
-                                    {merchantCode.merchantCode}
-                                </option>
-                            ))}
-                        </select>
-
-                        <button type="button" className="button button-primary"
-                            onClick={() => setIsOpenMerchant(true)}>
-                            <AiFillSetting />
-                        </button>
-                    </div>
-
                 </Col>
 
             </Row>

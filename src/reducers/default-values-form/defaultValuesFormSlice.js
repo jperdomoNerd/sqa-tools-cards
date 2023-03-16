@@ -54,6 +54,7 @@ export const defaultValuesFormSlice = createSlice({
             state.email = action.payload.email
             state.mechantsData = action.payload.mechantsData
             state.secretKey = action.payload.secretKey
+            state.merchantCode = action.payload.merchantCode
         },
 
         setCardFormData: (state, action) => {
