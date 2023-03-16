@@ -4,16 +4,16 @@ if (window.localStorage.getItem('defaultValues') === null) {
         secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce',
         merchantCode: '20000023',
         mechantsData: [
-            // {
-            //     merchant: 'MzrC/gl6VwS67JrIE+Kyng==',
-            //     merchantCode: '577',
-            //     secretKey: '7f127fdad955567d93861c206027e6b7796592645692c77375666ef00629b230'
-            // },
-            // {
-            //     merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
-            //     merchantCode: '20000023',
-            //     secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce'
-            // }
+            {
+                merchant: 'MzrC/gl6VwS67JrIE+Kyng==',
+                merchantCode: '577',
+                secretKey: '7f127fdad955567d93861c206027e6b7796592645692c77375666ef00629b230'
+            },
+            {
+                merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
+                merchantCode: '20000023',
+                secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce'
+            }
         ],
         email: 'julian.perdomo@cenposd365.com',
         cardNumber: '4545454555455',
