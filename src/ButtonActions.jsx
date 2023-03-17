@@ -68,27 +68,7 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
             >
                 Create SimpleWebPay
             </button>
-
             <Row>
-                {/* <Col> */}
-                    {/* Merchant */}
-                    {/* <div className='taskForm-wrapper'> */}
-                        {/* <label htmlFor="" className='label mb-small'>Merchant:</label> */}
-
-                        {/* <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                            className='input custom-select mr-sm-4'
-                            onChange={changeMerchant}
-                            value={merchante}>
-                            {mechantsData.map((merchant, index) => (
-                                <option key={index} value={merchante} >
-                                    {merchant.merchant}
-                                </option>
-                            ))}
-                        </select> */}
-                    {/* </div> */}
-
-                {/* </Col> */}
-
                 <Col>
                     <form>
                         <div className='mb-medium'>
@@ -114,36 +94,7 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
                     </form>
                     {/* Merchant Code */}
                 </Col>
-
             </Row>
-
-            <Row>
-
-                {/* <Col> */}
-
-                {/* SecretKey */}
-                {/* <div className='mb-medium'>
-                        <label htmlFor="" className='label mb-small'>Secret Key:</label>
-                        <input type="text" className='input' value={secretKeys}
-                            onChange={e => setSecretKey(e.target.value)} disabled />
-                    </div> */}
-
-                {/* </Col> */}
-
-                {/* <Col>
-                    <div className='mb-medium'>
-                        <label htmlFor="" className='label mb-small'>Email:</label>
-                        <input type="text" className='input' value={email} onChange={e => setEmail(e.target.value)} />
-                    </div>
-                </Col> */}
-
-            </Row>
-
-
-
-
-
-
         </div>
     )
 }

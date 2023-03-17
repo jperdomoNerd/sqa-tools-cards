@@ -1,9 +1,18 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { SWPButtons } from './SWPButtons'
+import { Card } from 'react-bootstrap'
 
 export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitAction }) => {
     const { submitNotIsComplete } = useSelector(state => state.controlSWPButtons)
-    const { responseJson } = useSelector(state => state.defaultValuesForm)
+    const { logHistory } = useSelector(state => state.defaultValuesForm)
+    const [logList, setLogList] = useState('')
+
+    useEffect(() => {
+      let logHistorySplit = logHistory.split('|')
+      logHistorySplit = logHistorySplit.map(log => <p>{log}</p>)
+      setLogList(logHistorySplit.map((log, key) => <p key={key}>{log}</p>))
+    }, [logHistory])
 
     return (
         <div className="object-view">
@@ -30,9 +39,14 @@ export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitA
                 </button>
             }
             <SWPButtons />
-            <div className='response-json'>
-                { responseJson.toString() }
-            </div>
+            <Card >
+                <Card.Body>
+                    <Card.Title>Log hitory</Card.Title>
+                    <ul>
+                        {logList}
+                    </ul>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

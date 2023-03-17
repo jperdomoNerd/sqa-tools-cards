@@ -39,7 +39,8 @@ const initialState = {
         message: '',
         isShow: false
     },
-    responseJson: ''
+    responseJson: '',
+    logHistory: ''
 }
 
 export const defaultValuesFormSlice = createSlice({
@@ -128,6 +129,12 @@ export const defaultValuesFormSlice = createSlice({
 
         setIsCrypto: (state, action) => {
             state.isCrypto = action.payload
+        },
+        appendLogHistory: (state, action) => {
+            state.logHistory += action.payload + '|'
+        },
+        emptyLogHistory: (state) => {
+            state.logHistory = ''
         }
     }
 })
@@ -146,6 +153,8 @@ export const { setDefaultValuesForm,
     addMerchantObj,
     updateMerchansData,
     setResponseJson,
-    setIsCrypto } = defaultValuesFormSlice.actions
+    setIsCrypto,
+    appendLogHistory,
+    emptyLogHistory } = defaultValuesFormSlice.actions
 
 export default defaultValuesFormSlice.reducer

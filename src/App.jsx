@@ -17,7 +17,7 @@ import { useState, useEffect } from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentTokenId, setResponseJson, setVerifyingPost } from './reducers/default-values-form/defaultValuesFormSlice'
+import { setCurrentTokenId, setResponseJson, setVerifyingPost, appendLogHistory, emptyLogHistory } from './reducers/default-values-form/defaultValuesFormSlice'
 import { cardAddedSuccesfully, submitIsComplete, cardAddedFinally, cardAddedFailed, processIsFailed } from './reducers/control-swp-buttons/controlSWPButtonsSlice'
 
 // Styles
@@ -50,83 +50,21 @@ export const App = () => {
       }).catch(err => console.error(err))
   }
 
-  const deleteToken = async () => {
-    const formDataSource = {
-      secretKey: secretKey,
-      merchant: merchant,
-      tokenId: tokenId
-    }
-    await _deleteToken(formDataSource)
-      .then(() => {
-        getToken()
-      }).catch(err => console.error(err))
-  }
-
-  const useToken = async () => {
-    const formDataSource = {
-      amount: amount,
-      invoiceNumber: invoiceNumber,
-      type: type,
-      email: email,
-      merchant: merchant,
-      secretKey: secretKey,
-      tokenId: tokenId
-    }
-    await _useToken(formDataSource)
-      .then(data => {
-        console.log(data)
-        dispatch(cardAddedFinally())
-      }).catch(err => console.error(err))
-  }
-
-  const convertCrypto = async () => {
-    const formDataSource = {
-      city: city,
-      state: state,
-      address: address,
-      zipCode: zipCode,
-      email: email,
-      merchant: merchant,
-      secretKey: secretKey,
-      cryptoTokenId: cryptoTokenId
-    }
-    await _convertCrypto(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
-  const useCrypto = async () => {
-    const formDataSource = {
-      amount: amount,
-      invoiceNumber: invoiceNumber,
-      city: city,
-      state: state,
-      address: address,
-      zipCode: zipCode,
-      type: type,
-      email: email,
-      merchant: merchant,
-      secretKey: secretKey,
-      cryptoTokenId: cryptoTokenId
-    }
-    await _useCrypto(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
   const createSimpleWebPay = async () => {
-    debugger
+    dispatch(emptyLogHistory())
+    dispatch(appendLogHistory('SimpleWebPay creation started'))
     const postSiteVerifyFormData = new FormData()
     postSiteVerifyFormData.append('secretKey', secretKey)
     postSiteVerifyFormData.append('merchant', merchant)
     postSiteVerifyFormData.append('email', email)
     const _verifyingPost = await siteVerify(postSiteVerifyFormData)
+    dispatch(appendLogHistory('VerifyingPost is ' + _verifyingPost))
     dispatch(setVerifyingPost(_verifyingPost))
-    _createSimpleWebPay(_verifyingPost, isCrypto)
+    _createSimpleWebPay(_verifyingPost, isCrypto, zipCode)
       .then(response => {
         if (response.result) {
+          dispatch(appendLogHistory('Card added successfully'))
+          dispatch(appendLogHistory(response.responseData))
           dispatch(submitIsComplete())
           dispatch(cardAddedSuccesfully())
           dispatch(processIsFailed())
@@ -134,10 +72,13 @@ export const App = () => {
           dispatch(setCurrentTokenId(response.token))
         }
       }).catch(error => {
+        dispatch(appendLogHistory('Card adition failed'))
+        dispatch(appendLogHistory(error.responseData))
         dispatch(cardAddedFailed())
         console.log(error.message)
       })
     setTimeout(() => {
+      dispatch(appendLogHistory('SimpleWebPay creation completed'))
       setShowSubmitButton(true)
     }, 2000)
   }
@@ -157,57 +98,6 @@ export const App = () => {
     _submitAction()
   }
 
-  const voidTransaction = async () => {
-    const formDataSource = {
-      merchant: merchant,
-      secretKey: secretKey,
-      referenceNumber: referenceNumber
-    }
-    await _voidTrasaction(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
-  const forceTransaction = async () => {
-    const formDataSource = {
-      merchant: merchant,
-      secretKey: secretKey,
-      referenceNumber: referenceNumber,
-      amount: amount
-    }
-    await _forceTransaction(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
-  const refundTransaction = async () => {
-    const formDataSource = {
-      merchant: merchant,
-      secretKey: secretKey,
-      referenceNumber: referenceNumber,
-      amount: amount
-    }
-    await _refundTransaction(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
-  const reversalTransaction = async () => {
-    const formDataSource = {
-      merchant: merchant,
-      secretKey: secretKey,
-      referenceNumber: referenceNumber,
-      amount: amount
-    }
-    await _reversalTransaction(formDataSource)
-      .then(data => {
-        console.log(data)
-      }).catch(err => console.error(err))
-  }
-
   return (
     <div className="app">
       {isOpen &&
@@ -218,12 +108,7 @@ export const App = () => {
         Open
       </button>
       <ButtonActions
-        getToken={getToken}
         createSimpleWebPay={createSimpleWebPay}
-        voidTransaction={voidTransaction}
-        forceTransaction={forceTransaction}
-        refundTransaction={refundTransaction}
-        reversalTransaction={reversalTransaction}
       />
       <ObjectView
         tokenList={tokenList}

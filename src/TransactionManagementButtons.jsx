@@ -1,5 +1,5 @@
 import { _forceTransaction, _voidTrasaction, _refundTransaction, _reversalTransaction } from './endpoints/endpoints'
-import { setResponseJson } from './reducers/default-values-form/defaultValuesFormSlice'
+import { appendLogHistory } from './reducers/default-values-form/defaultValuesFormSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -9,6 +9,7 @@ export const TransactionManagementButtons = () => {
     const dispatch = useDispatch()
 
     const voidTransaction = async () => {
+        dispatch(appendLogHistory('Void transaction initiated'))
         const formDataSource = {
             merchant: merchant,
             secretKey: secretKey,
@@ -16,12 +17,18 @@ export const TransactionManagementButtons = () => {
         }
         await _voidTrasaction(formDataSource)
             .then(data => {
-                console.log(data)
-                dispatch(setResponseJson(JSON.stringify(data)))
+                if (data.Result === 0) {
+                    dispatch(appendLogHistory('Void transaction completed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                } else {
+                    dispatch(appendLogHistory('Void transaction failed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                }
             }).catch(err => console.error(err))
     }
 
     const forceTransaction = async () => {
+        dispatch(appendLogHistory('Force transaction initiated'))
         const formDataSource = {
             merchant: merchant,
             secretKey: secretKey,
@@ -30,12 +37,18 @@ export const TransactionManagementButtons = () => {
         }
         await _forceTransaction(formDataSource)
             .then(data => {
-                console.log(data)
-                dispatch(setResponseJson(JSON.stringify(data)))
+                if (data.Result === 0) {
+                    dispatch(appendLogHistory('Void transaction completed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                } else {
+                    dispatch(appendLogHistory('Void transaction failed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                }
             }).catch(err => console.error(err))
     }
 
     const refundTransaction = async () => {
+        dispatch(appendLogHistory('Refund transaction initiated'))
         const formDataSource = {
             merchant: merchant,
             secretKey: secretKey,
@@ -44,12 +57,18 @@ export const TransactionManagementButtons = () => {
         }
         await _refundTransaction(formDataSource)
             .then(data => {
-                console.log(data)
-                dispatch(setResponseJson(JSON.stringify(data)))
+                if (data.Result === 0) {
+                    dispatch(appendLogHistory('Void transaction completed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                } else {
+                    dispatch(appendLogHistory('Void transaction failed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                }
             }).catch(err => console.error(err))
     }
 
     const reversalTransaction = async () => {
+        dispatch(appendLogHistory('Reversal transaction initiated'))
         const formDataSource = {
             merchant: merchant,
             secretKey: secretKey,
@@ -58,8 +77,13 @@ export const TransactionManagementButtons = () => {
         }
         await _reversalTransaction(formDataSource)
             .then(data => {
-                console.log(data)
-                dispatch(setResponseJson(JSON.stringify(data)))
+                if (data.Result === 0) {
+                    dispatch(appendLogHistory('Void transaction completed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                } else {
+                    dispatch(appendLogHistory('Void transaction failed'))
+                    dispatch(appendLogHistory(JSON.stringify(data)))
+                }
             }).catch(err => console.error(err))
     }
 
