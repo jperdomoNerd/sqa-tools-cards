@@ -48,6 +48,11 @@ html {
     color: #ffffff;
     font-weight: 600;
     cursor: pointer;
+    max-width: 12rem;
+}
+
+.button-icon {
+    max-width: 4rem;
 }
 
 .button-primary {
@@ -70,6 +75,18 @@ html {
     border: 2px #ff0000 solid;
 }
 
+.mt-small {
+    margin-top: 0.5rem;
+}
+
+.mt-medium {
+    margin-top: 0.875rem;
+}
+
+.mt-big {
+    margin-top: 1.125rem;
+}
+
 .mb-small {
     margin-bottom: 0.5rem;
 }
@@ -88,9 +105,6 @@ html {
         "open-button"
         "button-actions"
         "object-view"
-        "button-card"
-        "button-submit"
-        "button-tokenManagement"
     ;
     gap: 1rem;
 }
@@ -231,6 +245,7 @@ html {
 
 /* Forms Modal */
 .forms-modal {
+    z-index: 99;
     position: fixed;
     top: 0;
     right: 0;
@@ -243,11 +258,8 @@ html {
     .app {
         grid-template-columns: 25% 75%;
         grid-template-areas:
-            "open-button object-view"
             "button-actions object-view"
-            "button-card object-view"
-            "button-submit object-view"
-            "button-tokenManagement object-view"
+            "open-button object-view"
         ;
         gap: 1rem;
     }
@@ -264,8 +276,8 @@ html {
 @media (min-width: 1008px) {
     .forms-container {
         grid-template-areas:
-            "configuration-form-data card-form-data location-form-data"
-            "transaction-form-data transaction-form-data transaction-form-data"
+            "location-form-data"
+            "transaction-form-data"
         ;
         gap: 3rem;
     }
@@ -274,7 +286,7 @@ html {
 @media (min-width: 1366px) {
     .forms-container {
         grid-template-areas:
-            "configuration-form-data card-form-data location-form-data transaction-form-data";
+            "location-form-data transaction-form-data";
         gap: 3rem;
     }
 }

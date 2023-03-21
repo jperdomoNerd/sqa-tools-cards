@@ -1,8 +1,8 @@
-export const _createSimpleWebPay = (verifyingPost, _isCrypto, _zipcode) => {
+export const _createSimpleWebPay = (_url, verifyingPost, _isCrypto, _zipcode) => {
+    debugger
     const isCrypto = (_isCrypto === 'true')
     const _createSimpleWebPayPromise = new Promise((resolve, reject) => {
         function CallbackSuccess(responseData) {
-            debugger
             resolve({
                 message: responseData.Message,
                 token: (responseData.RecurringSaleTokenId) 
@@ -12,7 +12,6 @@ export const _createSimpleWebPay = (verifyingPost, _isCrypto, _zipcode) => {
             })
         }
         function CallbackCancel(responseData) {
-            debugger
             reject({
                 message: responseData.Message,
                 token: '',
@@ -21,7 +20,7 @@ export const _createSimpleWebPay = (verifyingPost, _isCrypto, _zipcode) => {
             })
         }
         $("#NewCenposPlugin").createWebpay({
-            url: 'https://webtest.cenpos.net/simplewebpay/cards/',
+            url: _url + 'cards/',
             params: `isemail=true&zipcode=${_zipcode}&verifyingPost=${verifyingPost}`,
             sessionToken: isCrypto,
             success: CallbackSuccess,

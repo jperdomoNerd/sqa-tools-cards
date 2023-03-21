@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setConfigurationFormData } from './reducers/default-values-form/defaultValuesFormSlice'
+import { setConfigurationFormData, setEnvironment } from './reducers/default-values-form/defaultValuesFormSlice'
 import { AiFillSetting } from "react-icons/ai";
 
 // Table
@@ -11,9 +11,9 @@ import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 
 export const ButtonActions = ({ createSimpleWebPay }) => {
-
     const dispatch = useDispatch()
-    const { mechantsData } = useSelector(state => state.defaultValuesForm)
+    const { mechantsData, environments, environment } = useSelector(state => state.defaultValuesForm)
+
     const [merchantCode, setMerchantCode] = useState('')
     const [merchante, setMerchant] = useState('')
     const [secretKeys, setSecretKey] = useState('')
@@ -37,7 +37,7 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
         dispatch(setConfigurationFormData(configurationData))
     }, [merchantCode])
 
-    const changeMerchantCode = (e) => {
+    const changeMerchantCode = e => {
         setMerchantCode(e.target.value)
         
         const _merchantsData = mechantsData.filter(merchantData =>
@@ -46,6 +46,10 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
         setSecretKey(_merchantsData.secretKey)
         setMerchant(_merchantsData.merchant)
         setMerchantCode(_merchantsData.merchantCode)
+    }
+
+    const changeEnvironment = e => {
+        dispatch(setEnvironment(e.target.value))
     }
 
     useEffect(() => {
@@ -61,22 +65,27 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
                 <TableMerchantsDataModal setIsOpenMerchant={setIsOpenMerchant} />
             }
 
-            <button
-                onClick={createSimpleWebPay}
-                type='button'
-                className='button button-primary mb-big'
-            >
-                Create SimpleWebPay
-            </button>
             <Row>
                 <Col>
                     <form>
                         <div className='mb-medium'>
-                            <label htmlFor="" className='label mb-small'>Merchant Code:</label>
-                            {/* <input type="text" className='input' value={merchantCode}
-                                onChange={e => setMerchantCode(e.target.value)} disabled /> */}
+                            <label htmlFor="" className='label mb-small'>Environment:</label>
                             <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
                                 className='input custom-select mr-sm-4'
+                                onChange={e => dispatch(setEnvironment(e.target.value))}
+                                value={environment}>
+                                {environments.map((environment, index) => (
+                                    <option key={index} value={environment.value} >
+                                        {environment.text}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='mb-medium'>
+                            <label htmlFor="" className='label mb-small'>Merchant Code:</label>
+                            <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                                className='input custom-select mr-sm-4 mb-big'
                                 onChange={changeMerchantCode}
                                 value={merchantCode}>
                                 {mechantsData.map((_merchantCode, index) => (
@@ -86,13 +95,20 @@ export const ButtonActions = ({ createSimpleWebPay }) => {
                                 ))}
                             </select>
 
-                            <button type="button" className="button button-primary"
+                            <button type="button" className="button button-icon button-primary"
                                 onClick={() => setIsOpenMerchant(true)}>
                                 <AiFillSetting />
                             </button>
                         </div>
+
+                        <button
+                            onClick={createSimpleWebPay}
+                            type='button'
+                            className='button button-primary mb-big'
+                        >
+                            Create SimpleWebPay
+                        </button>
                     </form>
-                    {/* Merchant Code */}
                 </Col>
             </Row>
         </div>

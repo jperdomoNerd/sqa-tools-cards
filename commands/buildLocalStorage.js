@@ -3,6 +3,7 @@ if (window.localStorage.getItem('defaultValues') === null) {
         merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
         secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce',
         merchantCode: '20000023',
+        environment: 'https://webqa.cenpos.net/simplewebpay/',
         mechantsData: [
             {
                 merchant: 'MzrC/gl6VwS67JrIE+Kyng==',
@@ -13,6 +14,16 @@ if (window.localStorage.getItem('defaultValues') === null) {
                 merchant: '/4S+YXsW7LBo6AjAg4VCQA==',
                 merchantCode: '20000023',
                 secretKey: '4439cea5b6e8bd963d2c2dbeb1c57918e02f616068df0bbec3c77a82a8e7dbce'
+            }
+        ],
+        environments: [
+            {
+                    value: 'https://webtest.cenpos.net/simplewebpay/',
+                    text: 'Dev'
+            },
+            {
+                value: 'https://webqa.cenpos.net/simplewebpay/',
+                text: 'QA'
             }
         ],
         email: 'julian.perdomo@cenposd365.com',

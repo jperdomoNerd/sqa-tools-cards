@@ -1,5 +1,4 @@
 import { ConfigurationFormData } from './ConfigurationFormData'
-import { CardFormData } from './CardFormData'
 import { LocationFormData } from './LocationFormData'
 import { TransactionFormData } from './TransactionFormData'
 
@@ -13,9 +12,6 @@ export const FormsModal = ({ setIsOpen }) => {
                         Close
                     </button>
                 </div>
-
-                {/* <ConfigurationFormData /> */}
-                <CardFormData />
                 <TransactionFormData />
                 <LocationFormData />
             </div>

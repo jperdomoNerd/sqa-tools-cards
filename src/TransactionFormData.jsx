@@ -80,48 +80,20 @@ export const TransactionFormData = () => {
                 <Row>
                     <Col>
                         <div className='mb-medium'>
-                            <label htmlFor="" className='label mb-small'>Token Id</label>
-
-                            <select style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
-                                className='input custom-select mr-sm-4'
-                                value={tokenId} onChange={e => setTokenId(e.target.value)}>
-                                {tokensId.map((tokenId, index) => (
-                                    <option key={index} value={tokenId}>{tokenId}</option>
-                                ))}
-                            </select>
-
-                            <button type="button" className="button button-primary"
-                                onClick={() => setIsOpenTableTokenId(true)}>
-                                <AiFillSetting />
-                            </button>
-
-                            {/* <input type="text" className='input' value={tokenId} onChange={e => setTokenId(e.target.value)} /> */}
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className="mb-medium">
-                            <label htmlFor="" className="label mb-small">Crypto Token Id</label>
-                            <textarea cols="20" rows="10" className='input textarea' value={cryptoTokenId} onChange={e => setCryptoTokenId(e.target.value)} />
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Amount</label>
                             <input type="text" className='input' value={amount} onChange={e => setAmount(e.target.value)} />
                         </div>
                     </Col>
-                </Row>
 
-                <Row>
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Invoice Number</label>
                             <input type="text" className='input' value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} />
                         </div>
                     </Col>
+                </Row>
 
+                <Row>
                     <Col>
                         <div className='mb-medium'>
                             <label htmlFor="" className='label mb-small'>Type</label>

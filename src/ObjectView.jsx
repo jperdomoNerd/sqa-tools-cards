@@ -1,22 +1,49 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { SWPButtons } from './SWPButtons'
 import { Card } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { _getToken } from './endpoints/endpoints'
+import { SWPButtons } from './SWPButtons'
 
-export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitAction }) => {
+export const ObjectView = ({ showSubmitButton, submitAction }) => {
     const { submitNotIsComplete } = useSelector(state => state.controlSWPButtons)
     const { logHistory } = useSelector(state => state.defaultValuesForm)
     const [logList, setLogList] = useState('')
+    const [showTokenList, setShowTokenList] = useState(false)
+    const [tokenList, setTokenList] = useState([])
 
     useEffect(() => {
-      let logHistorySplit = logHistory.split('|')
-      logHistorySplit = logHistorySplit.map(log => <p>{log}</p>)
-      setLogList(logHistorySplit.map((log, key) => <p key={key}>{log}</p>))
+        let logHistorySplit = logHistory.split('|')
+        setLogList(logHistorySplit.map((log, key) => <p key={key}>{log}</p>))
     }, [logHistory])
 
+    const getToken = async () => {
+        const formDataSource = {
+            secretKey: secretKey,
+            merchant: merchant,
+            email: email
+        }
+        await _getToken(formDataSource)
+            .then(tokens => {
+                buildTokenList(tokens)
+                setShowTokenList(true)
+            }).catch(err => console.error(err))
+    }
+
+    const buildTokenList = tokens => {
+        const _tokenList = tokens.map(token => <tr key={token.TokenId}>
+            <td>{token.TokenId}</td>
+            <td>{token.CardNumber}</td>
+            <td>{token.CardType}</td>
+            <td>{token.CardExpirationDate}</td>
+            <td>{token.NameOnCard}</td>
+        </tr>)
+        setTokenList(_tokenList)
+    }
+
     return (
+
         <div className="object-view">
-            {showTokenList && 
+            {showTokenList &&
                 <table className="table">
                     <thead>
                         <tr>
@@ -28,16 +55,25 @@ export const ObjectView = ({ tokenList, showTokenList, showSubmitButton, submitA
                         </tr>
                     </thead>
                     <tbody>
-                        { tokenList }
+                        {tokenList}
                     </tbody>
                 </table>
             }
-            <div id='NewCenposPlugin'></div>
-            {submitNotIsComplete && showSubmitButton && 
-                <button onClick={submitAction} className='button button-primary button-submit'>
+            <div id='NewCenposPlugin' className='mb-big'></div>
+            {submitNotIsComplete && showSubmitButton &&
+                <button
+                    onClick={submitAction}
+                    className='button button-primary button-submit mb-big mt-big'
+                >
                     Submit
                 </button>
             }
+            <button
+                onClick={getToken}
+                className='button button-primary button-submit mb-big mt-big'
+            >
+                Get Token
+            </button>
             <SWPButtons />
             <Card >
                 <Card.Body>
