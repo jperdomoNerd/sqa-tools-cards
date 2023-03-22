@@ -134,7 +134,6 @@ html {
 
 .button-submit {
     grid-area: button-submit;
-    display: flex;
     margin-top: -14em;
 }
 
