@@ -68,13 +68,15 @@ export const ObjectView = ({ showSubmitButton, submitAction }) => {
                     Submit
                 </button>
             }
-            <button
-                onClick={getToken}
-                className='button button-primary button-submit mb-big mt-big'
-            >
-                Get Token
-            </button>
-            <SWPButtons />
+            <div>
+                <button
+                    onClick={getToken}
+                    className='button button-primary button-submit mb-big mt-big mr-medium'
+                >
+                    Get Token
+                </button>
+                <SWPButtons />
+            </div>
             <Card >
                 <Card.Body>
                     <Card.Title>Log hitory</Card.Title>

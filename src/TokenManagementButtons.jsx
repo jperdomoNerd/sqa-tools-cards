@@ -103,7 +103,7 @@ export const TokenManagementButtons = () => {
     }
 
     return (
-        <div className='button-tokenManagement'>
+        <>
             {isCrypto === 'false' &&
                 <button
                     type='button'
@@ -140,6 +140,6 @@ export const TokenManagementButtons = () => {
                     Use Crypto
                 </button>
             }
-        </div>
+        </>
     )
 }

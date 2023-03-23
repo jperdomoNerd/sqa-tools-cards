@@ -88,7 +88,7 @@ export const TransactionManagementButtons = () => {
     }
 
     return (
-        <div className='button-card'>
+        <>
             <button
                 type="button"
                 className="button button-primary mb-big mr-medium"
@@ -117,6 +117,6 @@ export const TransactionManagementButtons = () => {
             >
                 Reversal Transaction
             </button>
-        </div>
+        </>
     )
 }
