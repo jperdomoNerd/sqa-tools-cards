@@ -1,5 +1,4 @@
 export const _createSimpleWebPay = (_url, verifyingPost, _isCrypto, _zipcode) => {
-    debugger
     const isCrypto = (_isCrypto === 'true')
     const _createSimpleWebPayPromise = new Promise((resolve, reject) => {
         function CallbackSuccess(responseData) {

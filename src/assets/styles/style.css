@@ -98,6 +98,17 @@ html {
 .mb-big {
     margin-bottom: 1.125rem;
 }
+.mr-small {
+    margin-right: 0.5rem;
+}
+
+.mr-medium {
+    margin-right: 0.875rem;
+}
+
+.mr-big {
+    margin-right: 1.125rem;
+}
 
 .app {
     display: grid;

@@ -107,7 +107,7 @@ export const TokenManagementButtons = () => {
             {isCrypto === 'false' &&
                 <button
                     type='button'
-                    className='button button-primary mb-big'
+                    className='button button-primary mb-big mr-medium'
                     onClick={deleteToken}
                 >
                     Delete Token
@@ -116,7 +116,7 @@ export const TokenManagementButtons = () => {
             {isCrypto === 'true' &&
                 <button
                     type='button'
-                    className='button button-primary mb-big'
+                    className='button button-primary mb-big mr-medium'
                     onClick={convertCrypto}
                 >
                     Convert Crypto Token
@@ -125,7 +125,7 @@ export const TokenManagementButtons = () => {
             {isCrypto === 'false' &&
                 <button
                     type='button'
-                    className='button button-primary mb-big'
+                    className='button button-primary mb-big mr-medium'
                     onClick={useToken}
                 >
                     Use Token
@@ -134,7 +134,7 @@ export const TokenManagementButtons = () => {
             {isCrypto === 'true' &&
                 <button
                     type='button'
-                    className='button button-primary mb-big'
+                    className='button button-primary mb-big mr-medium'
                     onClick={useCrypto}
                 >
                     Use Crypto

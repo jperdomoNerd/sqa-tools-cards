@@ -6,7 +6,7 @@ import { SWPButtons } from './SWPButtons'
 
 export const ObjectView = ({ showSubmitButton, submitAction }) => {
     const { submitNotIsComplete } = useSelector(state => state.controlSWPButtons)
-    const { logHistory } = useSelector(state => state.defaultValuesForm)
+    const { logHistory, secretKey, merchant, email } = useSelector(state => state.defaultValuesForm)
     const [logList, setLogList] = useState('')
     const [showTokenList, setShowTokenList] = useState(false)
     const [tokenList, setTokenList] = useState([])
@@ -63,7 +63,7 @@ export const ObjectView = ({ showSubmitButton, submitAction }) => {
             {submitNotIsComplete && showSubmitButton &&
                 <button
                     onClick={submitAction}
-                    className='button button-primary button-submit mb-big mt-big'
+                    className='button button-primary button-submit mb-big mt-big mr-medium'
                 >
                     Submit
                 </button>

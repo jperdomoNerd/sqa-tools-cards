@@ -91,28 +91,28 @@ export const TransactionManagementButtons = () => {
         <div className='button-card'>
             <button
                 type="button"
-                className="button button-primary mb-big"
+                className="button button-primary mb-big mr-medium"
                 onClick={() => voidTransaction()}
             >
                 Void Trasaction
             </button>
             <button
                 type="button"
-                className="button button-primary mb-big"
+                className="button button-primary mb-big mr-medium"
                 onClick={() => forceTransaction()}
             >
                 Force Transaction
             </button>
             <button
                 type="button"
-                className="button button-primary mb-big"
+                className="button button-primary mb-big mr-medium"
                 onClick={() => refundTransaction()}
             >
                 Refund Transaction
             </button>
             <button
                 type="button"
-                className="button button-primary mb-big"
+                className="button button-primary mb-big mr-medium"
                 onClick={() => reversalTransaction()}
             >
                 Reversal Transaction
