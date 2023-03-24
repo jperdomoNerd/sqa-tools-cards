@@ -2,6 +2,7 @@
 import { ButtonActions } from './ButtonActions'
 import { FormsModal } from './FormsModal'
 import { ObjectView } from './ObjectView'
+import { Container } from 'react-bootstrap'
 
 // Libs
 import {
@@ -70,24 +71,30 @@ export const App = () => {
   }
 
   return (
-    <div className="app">
-      <div>
-        {isOpen &&
-          <FormsModal setIsOpen={setIsOpen} />
-        }
-        <ButtonActions
-          createSimpleWebPay={createSimpleWebPay}
-        />
-        <button type='button' className='open-button button button-primary'
-          onClick={() => setIsOpen(true)}>
-          Data
-        </button>
-      </div>
+    <Container>
+      <div className="app">
+        <div className='title mt-big'>
+            <h1 className='text-center'>SQA Tools</h1>
+        </div>
+        
+        <div>
+          {isOpen &&
+            <FormsModal setIsOpen={setIsOpen} />
+          }
+          <ButtonActions
+            createSimpleWebPay={createSimpleWebPay}
+          />
+          <button type='button' className='open-button button button-primary'
+            onClick={() => setIsOpen(true)}>
+            Data
+          </button>
+        </div>
 
-      <ObjectView
-        showSubmitButton={showSubmitButton}
-        submitAction={submitAction}
-      />
-    </div>
+        <ObjectView
+          showSubmitButton={showSubmitButton}
+          submitAction={submitAction}
+        />
+      </div>
+    </Container>
   )
 }

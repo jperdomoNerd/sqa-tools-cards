@@ -60,15 +60,15 @@ export const ObjectView = ({ showSubmitButton, submitAction }) => {
                 </table>
             }
             <div id='NewCenposPlugin' className='mb-big'></div>
-            {submitNotIsComplete && showSubmitButton &&
-                <button
-                    onClick={submitAction}
-                    className='button button-primary button-submit mb-big mt-big mr-medium'
-                >
-                    Submit
-                </button>
-            }
             <div>
+                {submitNotIsComplete && showSubmitButton &&
+                    <button
+                        onClick={submitAction}
+                        className='button button-primary button-submit mb-big mt-big mr-medium'
+                    >
+                        Submit
+                    </button>
+                }
                 <button
                     onClick={getToken}
                     className='button button-primary button-submit mb-big mt-big mr-medium'

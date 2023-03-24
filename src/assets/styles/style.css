@@ -113,6 +113,7 @@ html {
 .app {
     display: grid;
     grid-template-areas:
+        "title"
         "open-button"
         "button-actions"
         "object-view"
@@ -215,11 +216,20 @@ html {
     grid-area: button-card;
 }
 
+.title {
+    grid-area: title;
+}
+
+.title h1 {
+    font-weight: 600;
+}
+
 .forms-container {
     width: auto;
     max-height: calc(100vh - 4vh);
     display: grid;
     grid-template-areas:
+        "title"
         "configuration-form-data"
         "card-form-data"
         "transaction-form-data"
@@ -268,6 +278,7 @@ html {
     .app {
         grid-template-columns: 25% 75%;
         grid-template-areas:
+            "title title"
             "button-actions object-view"
             "open-button object-view"
         ;
@@ -276,6 +287,7 @@ html {
 
     .forms-container {
         grid-template-areas:
+            "title title"
             "configuration-form-data card-form-data"
             "transaction-form-data location-form-data"
         ;
@@ -286,6 +298,7 @@ html {
 @media (min-width: 1008px) {
     .forms-container {
         grid-template-areas:
+            "title"
             "location-form-data"
             "transaction-form-data"
         ;
@@ -296,6 +309,7 @@ html {
 @media (min-width: 1366px) {
     .forms-container {
         grid-template-areas:
+            "title title"
             "location-form-data transaction-form-data";
         gap: 3rem;
     }
